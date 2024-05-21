@@ -16,10 +16,9 @@ end
     desk_number: rand(1..10),
     bed_number: rand(1..10),
     internet_speed: rand(1..100),
-    outdoor: [true, false].sample,
-    air_conditionning: [true, false].sample,
+    outdoor: false,
+    air_conditionning: false,
     price_per_day: rand(1..500),
-    # One place per user
     user: User.all.sample
   )
 end
