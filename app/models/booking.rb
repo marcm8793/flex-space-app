@@ -2,8 +2,8 @@ class Booking < ApplicationRecord
   belongs_to :place
   belongs_to :user
 
-  validates :first_day, presence: true, date: true
-  validates :last_day, presence: true, date: true
+  validates :first_day, presence: true
+  validates :last_day, presence: true
   validates :place_id, presence: true
   validates :user_id, presence: true
 
