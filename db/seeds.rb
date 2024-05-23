@@ -3,7 +3,12 @@ require 'faker'
 puts "Creating 50 users, 50 places and 50 bookings📈"
 # Create 10 users
 50.times do
-  User.create!(email: Faker::Internet.email, password: "password")
+  User.create!(
+    email: Faker::Internet.email,
+    password: "password",
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name
+    )
 end
 
 50.times do
