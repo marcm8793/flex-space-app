@@ -1,3 +1,70 @@
+<h2>Places</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Address Country</th>
+      <th>Address City</th>
+      <th>Address Street Name</th>
+      <th>Address Zip Code</th>
+      <th>Screen Number</th>
+      <th>Desk Number</th>
+      <th>Bed Number</th>
+      <th>Internet Speed</th>
+      <th>Outdoor</th>
+      <th>Air Conditioning</th>
+      <th>Price Per Day</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @places.each do |place| %>
+      <tr>
+        <td><%= place.address_country %></td>
+        <td><%= place.address_city %></td>
+        <td><%= place.address_street_name %></td>
+        <td><%= place.address_zip_code %></td>
+        <td><%= place.screen_number %></td>
+        <td><%= place.desk_number %></td>
+        <td><%= place.bed_number %></td>
+        <td><%= place.internet_speed %></td>
+        <td><%= place.outdoor %></td>
+        <td><%= place.air_conditionning %></td>
+        <td><%= place.price_per_day %></td>
+        <td>
+          <%= link_to 'Edit', edit_place_path(place) %> |
+          <%= link_to 'Delete', place_path(place), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "card-remove-link" %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="12">
+          <h3>Bookings</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% place.bookings.each do |booking| %>
+                <tr>
+                  <td><%= booking.first_day %></td>
+                  <td><%= booking.last_day %></td>
+                  <td>
+                    <%= link_to 'Edit', edit_place_booking_path(place, booking) %> |
+                    <%= link_to 'Delete', place_booking_path(place, booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "card-remove-link" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <h2>Add a New Place</h2>
 
 <%= simple_form_for @place do |f| %>
@@ -49,3 +116,29 @@
     <%= f.submit 'Create Place' %>
   </div>
 <% end %>
+
+
+<h2>My Bookings</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Place</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bookings.each do |booking| %>
+      <tr>
+        <td><%= booking.place.address_street_name %>, <%= booking.place.address_city %>, <%= booking.place.address_country %></td>
+        <td><%= booking.first_day %></td>
+        <td><%= booking.last_day %></td>
+        <td>
+          <%= link_to 'Edit', edit_place_booking_path(booking.place, booking), class: 'btn btn-secondary' %> |
+          <%= link_to 'Delete', place_booking_path(booking.place, booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "card-remove-link" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
