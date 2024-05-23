@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
+  authenticated :user do
+    get '/trip', to: 'trips#index'
+  end
+
   root to: "places#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -8,10 +12,6 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   resources :places do
     resources :bookings
-  end
-
-  authenticated :user do
-    get '/trip', to: 'trip#index'
   end
 
   # Defines the root path route ("/")
