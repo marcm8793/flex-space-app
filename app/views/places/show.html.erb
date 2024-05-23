@@ -1,3 +1,18 @@
+
+
+
+
+<h3><%= @place.address_city %>, <%= @place.address_country %></h3>
+
+<h4>Ce que <%= @place.user.first_name %> vous propose</h4>
+<li><i class="fa-solid fa-desktop"></i> : <%= @place.screen_number %></li>
+<li><i class="fa-solid fa-chair"></i> : <%= @place.desk_number %></li>
+<li><i class="fa-solid fa-bed"></i> : <%= @place.bed_number %></li>
+<li><i class="fa-solid fa-wifi"></i> : <%= @place.internet_speed %></li>
+<li><%= @place.outdoor %></li>
+<li><%= @place.air_conditionning %></li>
+
+
 <h1>New Booking for <%= @place.address_country %></h1>
 
 <%= render  'shared/placeform' %>
