@@ -1,144 +1,147 @@
-<h2>Places</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Address Country</th>
-      <th>Address City</th>
-      <th>Address Street Name</th>
-      <th>Address Zip Code</th>
-      <th>Screen Number</th>
-      <th>Desk Number</th>
-      <th>Bed Number</th>
-      <th>Internet Speed</th>
-      <th>Outdoor</th>
-      <th>Air Conditioning</th>
-      <th>Price Per Day</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @places.each do |place| %>
-      <tr>
-        <td><%= place.address_country %></td>
-        <td><%= place.address_city %></td>
-        <td><%= place.address_street_name %></td>
-        <td><%= place.address_zip_code %></td>
-        <td><%= place.screen_number %></td>
-        <td><%= place.desk_number %></td>
-        <td><%= place.bed_number %></td>
-        <td><%= place.internet_speed %></td>
-        <td><%= place.outdoor %></td>
-        <td><%= place.air_conditionning %></td>
-        <td><%= place.price_per_day %></td>
-        <td>
-          <%= link_to 'Edit', edit_place_path(place) %> |
-          <%= link_to 'Delete', place_path(place), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "card-remove-link" %>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="12">
-          <h3>Bookings</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% place.bookings.each do |booking| %>
-                <tr>
-                  <td><%= booking.first_day %></td>
-                  <td><%= booking.last_day %></td>
-                  <td>
-                    <%= link_to 'Edit', edit_place_booking_path(place, booking) %> |
-                    <%= link_to 'Delete', place_booking_path(place, booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "card-remove-link" %>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<h2>Add a New Place</h2>
-
-<%= simple_form_for @place do |f| %>
-  <div class="field">
-    <%= f.label :address_country %>
-    <%= f.text_field :address_country %>
-  </div>
-  <div class="field">
-    <%= f.label :address_city %>
-    <%= f.text_field :address_city %>
-  </div>
-  <div class="field">
-    <%= f.label :address_street_name %>
-    <%= f.text_field :address_street_name %>
-  </div>
-  <div class="field">
-    <%= f.label :address_zip_code %>
-    <%= f.text_field :address_zip_code %>
-  </div>
-  <div class="field">
-    <%= f.label :screen_number %>
-    <%= f.number_field :screen_number %>
-  </div>
-  <div class="field">
-    <%= f.label :desk_number %>
-    <%= f.number_field :desk_number %>
-  </div>
-  <div class="field">
-    <%= f.label :bed_number %>
-    <%= f.number_field :bed_number %>
-  </div>
-  <div class="field">
-    <%= f.label :internet_speed %>
-    <%= f.number_field :internet_speed, step: :any %>
-  </div>
-  <div class="field">
-    <%= f.label :outdoor %>
-    <%= f.check_box :outdoor %>
-  </div>
-  <div class="field">
-    <%= f.label :air_conditionning %>
-    <%= f.check_box :air_conditionning %>
-  </div>
-  <div class="field">
-    <%= f.label :price_per_day %>
-    <%= f.number_field :price_per_day, step: :any %>
-  </div>
-  <div class="actions">
-    <%= f.submit 'Create Place' %>
-  </div>
-<% end %>
-
-
-<h2>My Bookings</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Place</th>
-      <th>Start Date</th>
-      <th>End Date</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
+<div class="container">
+  <h2>My Bookings</h2>
+  <div class="row">
     <% @bookings.each do |booking| %>
-      <tr>
-        <td><%= booking.place.address_street_name %>, <%= booking.place.address_city %>, <%= booking.place.address_country %></td>
-        <td><%= booking.first_day %></td>
-        <td><%= booking.last_day %></td>
-        <td>
-          <%= link_to 'Edit', edit_place_booking_path(booking.place, booking), class: 'btn btn-secondary' %> |
-          <%= link_to 'Delete', place_booking_path(booking.place, booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "card-remove-link" %>
-        </td>
-      </tr>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title"><%= booking.place.address_street_name %>, <%= booking.place.address_city %>, <%= booking.place.address_country %></h5>
+            <p class="card-text">
+              <strong>Start Date:</strong> <%= booking.first_day %><br>
+              <strong>End Date:</strong> <%= booking.last_day %><br>
+              <strong>Zip Code:</strong> <%= booking.place.address_zip_code %><br>
+              <strong>Screen Number:</strong> <%= booking.place.screen_number %><br>
+              <strong>Desk Number:</strong> <%= booking.place.desk_number %><br>
+              <strong>Bed Number:</strong> <%= booking.place.bed_number %><br>
+              <strong>Internet Speed:</strong> <%= booking.place.internet_speed %> Mbps<br>
+              <strong>Outdoor:</strong> <%= booking.place.outdoor ? '✓' : '✗' %><br>
+              <strong>Air Conditioning:</strong> <%= booking.place.air_conditionning ? '✓' : '✗' %><br>
+              <strong>Price Per Day:</strong> $<%= booking.place.price_per_day %>
+            </p>
+            <div>
+              <%= link_to 'Edit', edit_place_booking_path(booking.place, booking), class: 'btn btn-secondary' %>
+              <%= link_to 'Delete', place_booking_path(booking.place, booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+            </div>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
+
+  <h2>Places</h2>
+  <div class="row">
+    <% @places.each do |place| %>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="card-title">
+              <h5><%= place.address_city %>, <%= place.address_country %></h5>
+            </div>
+            <p class="card-text">
+              <strong>Street:</strong> <%= place.address_street_name %><br>
+              <strong>Zip Code:</strong> <%= place.address_zip_code %><br>
+              <strong>Screen Number:</strong> <%= place.screen_number %><br>
+              <strong>Desk Number:</strong> <%= place.desk_number %><br>
+              <strong>Bed Number:</strong> <%= place.bed_number %><br>
+              <strong>Internet Speed:</strong> <%= place.internet_speed %> Mbps<br>
+              <strong>Outdoor:</strong> <%= place.outdoor ? '✓' : '✗' %><br>
+              <strong>Air Conditioning:</strong> <%= place.air_conditionning ? '✓' : '✗' %><br>
+              <strong>Price Per Day:</strong> $<%= place.price_per_day %>
+            </p>
+            <div>
+              <%= link_to 'Edit', edit_place_path(place), class: "btn btn-primary" %>
+              <% if place.bookings.any? %>
+                <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Tooltip on top" disabled>
+                  Delete
+                 <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="Can not delete places if you have bookings"></i>
+                </button>
+              <% else %>
+                <%= link_to 'Delete', place_path(place), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+              <% end %>
+            </div>
+          </div>
+          <div class="card-footer">
+            <% if place.bookings.any? %>
+              <h3>
+                <a class="btn btn-secondary" data-bs-toggle="collapse" href="#bookings-<%= place.id %>" role="button" aria-expanded="false" aria-controls="bookings-<%= place.id %>">
+                  Show Bookings
+                </a>
+              </h3>
+              <div class="collapse" id="bookings-<%= place.id %>">
+                <% place.bookings.each do |booking| %>
+                  <div class="card mt-2">
+                    <div class="card-body">
+                      <p class="card-text">
+                        <strong>Start Date:</strong> <%= booking.first_day %><br>
+                        <strong>End Date:</strong> <%= booking.last_day %>
+                      </p>
+                      <div>
+                        <%= link_to 'Edit', edit_place_booking_path(place, booking), class: "btn btn-secondary" %>
+                        <%= link_to 'Delete', place_booking_path(place, booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <h3>
+                <button class="btn btn-secondary" disabled>No bookings</button>
+              </h3>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <h2>Add a New Place</h2>
+  <%= simple_form_for @place do |f| %>
+    <div class="field">
+      <%= f.label :address_country %>
+      <%= f.text_field :address_country %>
+    </div>
+    <div class="field">
+      <%= f.label :address_city %>
+      <%= f.text_field :address_city %>
+    </div>
+    <div class="field">
+      <%= f.label :address_street_name %>
+      <%= f.text_field :address_street_name %>
+    </div>
+    <div class="field">
+      <%= f.label :address_zip_code %>
+      <%= f.text_field :address_zip_code %>
+    </div>
+    <div class="field">
+      <%= f.label :screen_number %>
+      <%= f.number_field :screen_number %>
+    </div>
+    <div class="field">
+      <%= f.label :desk_number %>
+      <%= f.number_field :desk_number %>
+    </div>
+    <div class="field">
+      <%= f.label :bed_number %>
+      <%= f.number_field :bed_number %>
+    </div>
+    <div class="field">
+      <%= f.label :internet_speed %>
+      <%= f.number_field :internet_speed, step: :any %>
+    </div>
+    <div class="field">
+      <%= f.label :outdoor %>
+      <%= f.check_box :outdoor %>
+    </div>
+    <div class="field">
+      <%= f.label :air_conditionning %>
+      <%= f.check_box :air_conditionning %>
+    </div>
+    <div class="field">
+      <%= f.label :price_per_day %>
+      <%= f.number_field :price_per_day, step: :any %>
+    </div>
+    <div class="actions">
+      <%= f.submit 'Create Place', class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

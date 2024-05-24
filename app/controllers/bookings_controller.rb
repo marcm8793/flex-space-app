@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_place, only: [:edit, :update, :destroy]
+  before_action :set_place, only: [:edit, :update, :destroy, :create]
 
   def new
     @booking = Booking.new
