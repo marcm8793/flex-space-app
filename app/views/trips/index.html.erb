@@ -114,6 +114,7 @@
       <%= f.label :price_per_day %>
       <%= f.number_field :price_per_day, step: :any %>
     </div>
+     <%= f.input :photos, as: :file, input_html: { multiple: true } %>
     <div class="actions">
       <%= f.submit 'Create Place', class: "btn btn-primary" %>
     </div>
