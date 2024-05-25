@@ -1,35 +1,62 @@
 <div class="container">
   <h3><%= @place.address_city %>, <%= @place.address_country %></h3>
 
-    <h4>Ce que <%= @place.user.first_name %> vous propose</h4>
-      <div class = "row">
-        <div class="col-6 col-md-4">
-          <ul class="list-group list-group-flush">
-              <li class="list-group-item"><i class="fa-solid fa-desktop"></i> <%= @place.screen_number %> Screen</li>
-              <li class="list-group-item"><i class="fa-solid fa-chair"></i> <%= @place.desk_number %> Desk</li>
-              <li class="list-group-item"><i class="fa-solid fa-bed"></i> <%= @place.bed_number %> Bed</li>
-              <li class="list-group-item"><i class="fa-solid fa-wifi"></i> Wifi speed <%= @place.internet_speed %> Mbit/s </li>
-              <li class="list-group-item"><i class="fa-regular fa-snowflake"></i>
-                <% if @place.air_conditionning = "True" %>
-                  <%= "Air Conditioning" %>
-                  <% else %>
-                  <strike><%= "Air Conditioning" %></strike>
-                <% end %>
-              </li>
-              <li class="list-group-item"><i class="fa-solid fa-sun"></i>
-              <% if @place.outdoor = "True" %>
-                <%= "Outdoor" %>
-                <% else %>
-                <strike><%= "Outdoor" %></strike>
-              <% end %>
-              </li>
-          </ul>
+      <div id="carouselExampleIndicators" class="carousel slide" style="width: 600px">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-        <div class="col-6 col-md-4">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="https://images.pexels.com/photos/2631746/pexels-photo-2631746.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="d-block w-100" alt="...">
+          </div>
         </div>
-        <div class="col-6 col-md-4">
-          <h4><%= @place.price_per_day.round %> € per day</h4>
-            <%= render  'shared/placeform' %>
-        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
+
+      <h4>Ce que <%= @place.user.first_name %> vous propose</h4>
+        <div class = "row">
+          <div class="col-6 col-md-4">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><i class="fa-solid fa-desktop"></i> <%= @place.screen_number %> Screen</li>
+                <li class="list-group-item"><i class="fa-solid fa-chair"></i> <%= @place.desk_number %> Desk</li>
+                <li class="list-group-item"><i class="fa-solid fa-bed"></i> <%= @place.bed_number %> Bed</li>
+                <li class="list-group-item"><i class="fa-solid fa-wifi"></i> Wifi speed <%= @place.internet_speed %> Mbit/s </li>
+                <li class="list-group-item"><i class="fa-regular fa-snowflake"></i>
+                  <% if @place.air_conditionning = "True" %>
+                    <%= "Air Conditioning" %>
+                    <% else %>
+                    <strike><%= "Air Conditioning" %></strike>
+                  <% end %>
+                </li>
+                <li class="list-group-item"><i class="fa-solid fa-sun"></i>
+                <% if @place.outdoor = "True" %>
+                  <%= "Outdoor" %>
+                  <% else %>
+                  <strike><%= "Outdoor" %></strike>
+                <% end %>
+                </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md-4">
+          </div>
+          <div class="col-6 col-md-4">
+            <h4><%= @place.price_per_day.round %> € per day</h4>
+              <%= render  'shared/placeform' %>
+          </div>
+        </div>
 </div>
