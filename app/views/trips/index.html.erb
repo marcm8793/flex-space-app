@@ -27,8 +27,8 @@
               <% if place.bookings.any? %>
                 <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Tooltip on top" disabled>
                   Delete
-                 <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="Can not delete places if you have bookings"></i>
                 </button>
+                 <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="Can not delete places if you have bookings"></i>
               <% else %>
                 <%= link_to 'Delete', place_path(place), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
               <% end %>
