@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container pt-3">
   <h3><%= @place.address_city %>, <%= @place.address_country %></h3>
-
+    <div class="d-flex justify-content-center p-4">
       <div id="carouselExampleIndicators" class="carousel slide" style="width: 600px">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -27,7 +27,7 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-
+    </div>
       <h4>Ce que <%= @place.user.first_name %> vous propose</h4>
         <div class = "row">
           <div class="col-6 col-md-4">
