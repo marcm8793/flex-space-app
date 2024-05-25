@@ -15,4 +15,5 @@ class Place < ApplicationRecord
   validates :air_conditionning, inclusion: { in: [true, false] }
   validates :price_per_day, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :user, presence: true
+  validates :photos, presence: true
 end

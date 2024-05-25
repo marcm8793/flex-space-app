@@ -22,9 +22,8 @@
           <li class="nav-item dropdown">
             <%= image_tag Avatarro.image("#{current_user.first_name} #{current_user.last_name}", random: true), class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <div class="dropdown-item"><%= current_user.first_name + " " + current_user.last_name %></div>
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
+              <div class="dropdown-item">👤 <%= current_user.first_name + " " + current_user.last_name %></div>
+              <%= link_to "📝 Edit profile", edit_user_registration_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
             </div>
           </li>
