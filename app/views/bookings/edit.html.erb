@@ -1,15 +1,13 @@
 <%= simple_form_for [@place, @booking] do |f| %>
-  <div class="form-inputs">
+  <div class="field">
     <%= f.label :first_day %>
     <%= f.date_field :first_day %>
   </div>
-
-  <div class="form-inputs">
+  <div class="field">
     <%= f.label :last_day %>
     <%= f.date_field :last_day %>
   </div>
-
-  <div class="form-actions">
-    <%= f.submit %>
+  <div class="actions">
+    <%= f.submit 'Update Booking', class: "btn btn-primary" %>
   </div>
 <% end %>

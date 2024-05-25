@@ -1,51 +1,121 @@
-<h2>Add a New Place</h2>
+<div class="container">
+  <h2>My Bookings</h2>
+  <%= render 'shared/bookingcard' %>
 
-<%= simple_form_for @place do |f| %>
-  <div class="field">
-    <%= f.label :address_country %>
-    <%= f.text_field :address_country %>
+  <h2>Places</h2>
+  <div class="row">
+    <% @places.each do |place| %>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="card-title">
+              <h5><%= place.address_city %>, <%= place.address_country %></h5>
+            </div>
+            <p class="card-text">
+              <strong>Street:</strong> <%= place.address_street_name %><br>
+              <strong>Zip Code:</strong> <%= place.address_zip_code %><br>
+              <strong>Screen Number:</strong> <%= place.screen_number %><br>
+              <strong>Desk Number:</strong> <%= place.desk_number %><br>
+              <strong>Bed Number:</strong> <%= place.bed_number %><br>
+              <strong>Internet Speed:</strong> <%= place.internet_speed %> Mbps<br>
+              <strong>Outdoor:</strong> <%= place.outdoor ? '✓' : '✗' %><br>
+              <strong>Air Conditioning:</strong> <%= place.air_conditionning ? '✓' : '✗' %><br>
+              <strong>Price Per Day:</strong> $<%= place.price_per_day %>
+            </p>
+            <div>
+              <%= link_to 'Edit', edit_place_path(place), class: "btn btn-primary" %>
+              <% if place.bookings.any? %>
+                <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Tooltip on top" disabled>
+                  Delete
+                </button>
+                 <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="Can not delete places if you have bookings"></i>
+              <% else %>
+                <%= link_to 'Delete', place_path(place), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+              <% end %>
+            </div>
+          </div>
+          <div class="card-footer">
+            <% if place.bookings.any? %>
+              <h3>
+                <a class="btn btn-secondary" data-bs-toggle="collapse" href="#bookings-<%= place.id %>" role="button" aria-expanded="false" aria-controls="bookings-<%= place.id %>">
+                  Show Bookings
+                </a>
+              </h3>
+              <div class="collapse" id="bookings-<%= place.id %>">
+                <% place.bookings.each do |booking| %>
+                  <div class="card mt-2">
+                    <div class="card-body">
+                      <p class="card-text">
+                        <strong>Start Date:</strong> <%= booking.first_day %><br>
+                        <strong>End Date:</strong> <%= booking.last_day %>
+                      </p>
+                      <div>
+                        <%= link_to 'Edit', edit_place_booking_path(place, booking), class: "btn btn-secondary" %>
+                        <%= link_to 'Delete', place_booking_path(place, booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <h3>
+                <button class="btn btn-secondary" disabled>No bookings</button>
+              </h3>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :address_city %>
-    <%= f.text_field :address_city %>
-  </div>
-  <div class="field">
-    <%= f.label :address_street_name %>
-    <%= f.text_field :address_street_name %>
-  </div>
-  <div class="field">
-    <%= f.label :address_zip_code %>
-    <%= f.text_field :address_zip_code %>
-  </div>
-  <div class="field">
-    <%= f.label :screen_number %>
-    <%= f.number_field :screen_number %>
-  </div>
-  <div class="field">
-    <%= f.label :desk_number %>
-    <%= f.number_field :desk_number %>
-  </div>
-  <div class="field">
-    <%= f.label :bed_number %>
-    <%= f.number_field :bed_number %>
-  </div>
-  <div class="field">
-    <%= f.label :internet_speed %>
-    <%= f.number_field :internet_speed, step: :any %>
-  </div>
-  <div class="field">
-    <%= f.label :outdoor %>
-    <%= f.check_box :outdoor %>
-  </div>
-  <div class="field">
-    <%= f.label :air_conditionning %>
-    <%= f.check_box :air_conditionning %>
-  </div>
-  <div class="field">
-    <%= f.label :price_per_day %>
-    <%= f.number_field :price_per_day, step: :any %>
-  </div>
-  <div class="actions">
-    <%= f.submit 'Create Place' %>
-  </div>
-<% end %>
+
+  <h2>Add a New Place</h2>
+  <%= simple_form_for @place do |f| %>
+    <div class="field">
+      <%= f.label :address_country %>
+      <%= f.text_field :address_country %>
+    </div>
+    <div class="field">
+      <%= f.label :address_city %>
+      <%= f.text_field :address_city %>
+    </div>
+    <div class="field">
+      <%= f.label :address_street_name %>
+      <%= f.text_field :address_street_name %>
+    </div>
+    <div class="field">
+      <%= f.label :address_zip_code %>
+      <%= f.text_field :address_zip_code %>
+    </div>
+    <div class="field">
+      <%= f.label :screen_number %>
+      <%= f.number_field :screen_number %>
+    </div>
+    <div class="field">
+      <%= f.label :desk_number %>
+      <%= f.number_field :desk_number %>
+    </div>
+    <div class="field">
+      <%= f.label :bed_number %>
+      <%= f.number_field :bed_number %>
+    </div>
+    <div class="field">
+      <%= f.label :internet_speed %>
+      <%= f.number_field :internet_speed, step: :any %>
+    </div>
+    <div class="field">
+      <%= f.label :outdoor %>
+      <%= f.check_box :outdoor %>
+    </div>
+    <div class="field">
+      <%= f.label :air_conditionning %>
+      <%= f.check_box :air_conditionning %>
+    </div>
+    <div class="field">
+      <%= f.label :price_per_day %>
+      <%= f.number_field :price_per_day, step: :any %>
+    </div>
+    <div class="actions">
+      <%= f.submit 'Create Place', class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

@@ -11,6 +11,13 @@ puts "Creating 50 users, 50 places and 50 bookings📈"
     )
 end
 
+User.create!(
+email: "michelle.mabelle@mail.com",
+password: "password",
+first_name: "Michelle",
+last_name: "Mabelle"
+)
+
 50.times do
   Place.create(
     address_country: Faker::Address.country,

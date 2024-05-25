@@ -23,6 +23,25 @@ class PlacesController < ApplicationController
     end
   end
 
+  def edit
+    @place = Place.find(params[:id])
+  end
+
+  def update
+    @place = Place.find(params[:id])
+    if @place.update(list_params)
+      redirect_to place_path(@place)
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @place = Place.find(params[:id])
+    @place.destroy
+    redirect_to places_path
+  end
+
   private
 
   def list_params
