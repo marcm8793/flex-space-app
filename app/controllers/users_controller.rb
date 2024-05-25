@@ -6,12 +6,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
-      bypass_sign_in(@user) if params[:user][:password].present? # Sign in the user bypassing validation in case their password changed
-      redirect_to root_path, notice: 'Profile updated successfully'
-    else
-      render :edit
-    end
   end
 
   private

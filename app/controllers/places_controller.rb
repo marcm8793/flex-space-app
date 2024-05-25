@@ -1,7 +1,11 @@
 class PlacesController < ApplicationController
   before_action :authenticate_user!
   def index
-    @places = Place.all
+    if params[:query].present?
+      @places = Place.where('address_city ILIKE ? OR address_country ILIKE ?', "%#{params[:query]}%", "%#{params[:query]}%")
+    else
+      @places = Place.all
+    end
   end
 
   def show
@@ -18,6 +22,7 @@ class PlacesController < ApplicationController
     @place.user = current_user
     if @place.save
       redirect_to place_path(@place)
+      flash[:success] = "You successfully created a new place!"
     else
       render :new, status: :unprocessable_entity
     end
@@ -31,6 +36,7 @@ class PlacesController < ApplicationController
     @place = Place.find(params[:id])
     if @place.update(list_params)
       redirect_to place_path(@place)
+      flash[:success] = "You successfully updated your place!"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -40,6 +46,7 @@ class PlacesController < ApplicationController
     @place = Place.find(params[:id])
     @place.destroy
     redirect_to places_path
+    flash[:success] = "You successfully deleted your place!"
   end
 
   private
