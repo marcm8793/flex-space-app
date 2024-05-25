@@ -53,7 +53,6 @@ gem "devise"
 gem 'faker'
 gem 'avatarro'
 gem "cloudinary"
-gem "dotenv-rails"
 
 group :development, :test do
   gem "dotenv-rails"
