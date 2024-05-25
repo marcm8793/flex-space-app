@@ -68,49 +68,64 @@
     <% end %>
   </div>
 
-  <h2>Add a New Place</h2>
-  <%= simple_form_for @place do |f| %>
-    <div class="field">
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" class="btn btn-flat" data-bs-toggle="modal" data-bs-target="#new_movie_modal">
+        add a place
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="new_movie_modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add a new place <%= @place.address_country %> list</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+        <div class="modal-body">
+  <%= simple_form_for (@place) do |f| %>
+    <div class="form-inputs">
       <%= f.label :address_country %>
       <%= f.text_field :address_country %>
     </div>
-    <div class="field">
+    <div class="form-inputs">
       <%= f.label :address_city %>
       <%= f.text_field :address_city %>
     </div>
-    <div class="field">
+    <div class="form-inputs">
       <%= f.label :address_street_name %>
       <%= f.text_field :address_street_name %>
     </div>
-    <div class="field">
+    <div class="form-inputs">
       <%= f.label :address_zip_code %>
       <%= f.text_field :address_zip_code %>
     </div>
-    <div class="field">
+    <div class="form-inputs">
       <%= f.label :screen_number %>
       <%= f.number_field :screen_number %>
     </div>
-    <div class="field">
+    <div class="form-inputs">
       <%= f.label :desk_number %>
       <%= f.number_field :desk_number %>
     </div>
-    <div class="field">
+    <div class="form-inputs">
       <%= f.label :bed_number %>
       <%= f.number_field :bed_number %>
     </div>
-    <div class="field">
+    <div class="form-inputs">
       <%= f.label :internet_speed %>
       <%= f.number_field :internet_speed, step: :any %>
     </div>
-    <div class="field">
+    <div class="form-inputs">
       <%= f.label :outdoor %>
       <%= f.check_box :outdoor %>
     </div>
-    <div class="field">
+    <div class="form-inputs">
       <%= f.label :air_conditionning %>
       <%= f.check_box :air_conditionning %>
     </div>
-    <div class="field">
+    <div class="form-inputs">
       <%= f.label :price_per_day %>
       <%= f.number_field :price_per_day, step: :any %>
     </div>
@@ -119,4 +134,15 @@
       <%= f.submit 'Create Place', class: "btn btn-primary" %>
     </div>
   <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Back</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 </div>

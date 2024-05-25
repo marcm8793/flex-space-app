@@ -62,6 +62,7 @@ last_name: "Mabelle"
   place.save!
 end
 
+
 9.times do
   start_date = Faker::Date.forward(days: 20)
   end_date = start_date + rand(1..10)

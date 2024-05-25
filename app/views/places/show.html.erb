@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container pt-3">
   <h3><%= @place.address_city %>, <%= @place.address_country %></h3>
-
+    <div class="d-flex justify-content-center p-4">
       <div id="carouselExampleIndicators" class="carousel slide" style="width: 600px">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -27,7 +27,7 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-
+    </div>
       <h4>Ce que <%= @place.user.first_name %> vous propose</h4>
         <div class = "row">
           <div class="col-6 col-md-4">
@@ -54,9 +54,26 @@
           </div>
           <div class="col-6 col-md-4">
           </div>
-          <div class="col-6 col-md-4">
+          <div class="col-6 col-md-4" data-controller="compute-price" data-compute-price-fee-value="<%= @place.price_per_day.round %>">
             <h4><%= @place.price_per_day.round %> € per day</h4>
-              <%= render  'shared/placeform' %>
+              <%= simple_form_for [@place, @booking] do |f| %>
+              <div class="form-inputs">
+                <%= f.label :first_day %>
+                <%= f.date_field :first_day, data: { compute_price_target: "firstDay" } %>
+              </div>
+              <div class="form-inputs" data-action="change->compute-price#compute">
+                <%= f.label :last_day %>
+                <%= f.date_field :last_day, data: { compute_price_target: "lastDay" } %>
+              </div>
+              <div class="btn form-actions">
+                <%= f.submit %>
+              </div>
+            <% end %>
+            <div data-compute-price-target="priceElement">
+              <p>Réservation pour <span data-compute-price-target="totalDays">0</span> jours</p>
+
+              <p>Prix total : <span data-compute-price-target="totalPrice">0</span> € </p>
+            </div>
           </div>
         </div>
 </div>
