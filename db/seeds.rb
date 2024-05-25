@@ -35,7 +35,7 @@ last_name: "Mabelle"
     )
 end
 
-50.times do
+50.times do db/seeds.rb
   start_date = Faker::Date.forward(days: 20)
   end_date = start_date + rand(1..10)
 
