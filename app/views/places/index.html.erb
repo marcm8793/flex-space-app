@@ -1,4 +1,5 @@
 <div class="container mt-3">
+
   <div class="row">
     <div class="col-12">
       <h1>🖥️ All our Working-Places 🏡</h1>
@@ -14,8 +15,7 @@
   <div class="row g-3">
     <% @places.each do |place| %>
       <div class="col-md-4">
-        <%= render 'place', place: place %>
-
+        <%= render 'shared/placecardindex', place: place %>
       </div>
     <% end %>
   </div>

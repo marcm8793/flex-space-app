@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="search"
 export default class extends Controller {
-  static targets = ["searchForm", "searchInput", "closeIcon"];
+  static targets = ["searchForm", "searchInput"];
 
   connect() {
     this.hideSearchForm();
@@ -15,7 +15,6 @@ export default class extends Controller {
 
   showSearchForm() {
     this.searchFormTarget.style.display = "flex";
-    this.closeIconTarget.style.display = "block";
   }
 
   hideSearchForm(event) {
@@ -30,16 +29,9 @@ export default class extends Controller {
       return;
     }
     this.searchFormTarget.style.display = "none";
-    this.closeIconTarget.style.display = "none";
   }
 
   stopPropagation(event) {
     event.stopPropagation();
-  }
-
-  resetForm(event) {
-    event.stopPropagation();
-    this.searchInputTarget.value = "";
-    this.hideSearchForm();
   }
 }

@@ -1,9 +1,15 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon" data-controller="search">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon container fixed-top" data-controller="navbar search" style="background-color: #F4F4F4;">
   <div class="container-fluid">
     <div class="d-flex align-items-center">
-      <%= link_to root_path, class: "navbar-brand" do %>
-          <%= image_tag "flexspaceicon.svg", alt: "Flexspace logo" %>
-        <span>flexspace</span>
+      <%= link_to root_path, class: "navbar-brand d-flex align-items-center" do %>
+        <div data-navbar-target="content" class="d-flex align-items-center">
+          <%= image_tag "flexspaceicon.svg", alt: "Flexspace logo", class: "me-2" %>
+          <div class="d-flex flex-column justify-content-center h-100">
+            <span class="h5 mb-0">flexspace</span>
+            <h6 class="small">by developers for developers</h6>
+          </div>
+        </div>
+        <%= image_tag "house-icon.png", alt: "Home icon", class: "d-none", data: { navbar_target: "icon" } %>
       <% end %>
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,7 +28,6 @@
           <% end %>
         </div>
         <% if user_signed_in? %>
-
           <li class="nav-item">
             <%= link_to trip_path, class: "nav-link" do%>
               <%= image_tag "Backpack.svg", alt: "backpack logo" %>
@@ -30,7 +35,7 @@
             <% end %>
           </li>
           <li class="nav-item dropdown">
-            <%= image_tag Avatarro.image("#{current_user.first_name} #{current_user.last_name}", random: true), class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <%= image_tag Avatarro.image("#{current_user.first_name} #{current_user.last_name}", random: false, color:"blue"), class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <div class="dropdown-item">👤 <%= current_user.first_name + " " + current_user.last_name %></div>
               <%= link_to "📝 Edit profile", edit_user_registration_path, class: "dropdown-item" %>

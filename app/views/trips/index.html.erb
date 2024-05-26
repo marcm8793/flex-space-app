@@ -1,148 +1,36 @@
-<div class="container">
-  <h2>My Bookings</h2>
-  <%= render 'shared/bookingcard' %>
-
-  <h2>Places</h2>
-  <div class="row">
-    <% @places.each do |place| %>
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <div class="card-body">
-            <div class="card-title">
-              <h5><%= place.address_city %>, <%= place.address_country %></h5>
-            </div>
-            <p class="card-text">
-              <strong>Street:</strong> <%= place.address_street_name %><br>
-              <strong>Zip Code:</strong> <%= place.address_zip_code %><br>
-              <strong>Screen Number:</strong> <%= place.screen_number %><br>
-              <strong>Desk Number:</strong> <%= place.desk_number %><br>
-              <strong>Bed Number:</strong> <%= place.bed_number %><br>
-              <strong>Internet Speed:</strong> <%= place.internet_speed %> Mbps<br>
-              <strong>Outdoor:</strong> <%= place.outdoor ? '✓' : '✗' %><br>
-              <strong>Air Conditioning:</strong> <%= place.air_conditionning ? '✓' : '✗' %><br>
-              <strong>Price Per Day:</strong> $<%= place.price_per_day %>
-            </p>
-            <div>
-              <%= link_to 'Edit', edit_place_path(place), class: "btn btn-primary" %>
-              <% if place.bookings.any? %>
-                <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Tooltip on top" disabled>
-                  Delete
-                </button>
-                 <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="Can not delete places if you have bookings"></i>
-              <% else %>
-                <%= link_to 'Delete', place_path(place), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
-              <% end %>
-            </div>
-          </div>
-          <div class="card-footer">
-            <% if place.bookings.any? %>
-              <h3>
-                <a class="btn btn-secondary" data-bs-toggle="collapse" href="#bookings-<%= place.id %>" role="button" aria-expanded="false" aria-controls="bookings-<%= place.id %>">
-                  Show Bookings
-                </a>
-              </h3>
-              <div class="collapse" id="bookings-<%= place.id %>">
-                <% place.bookings.each do |booking| %>
-                  <div class="card mt-2">
-                    <div class="card-body">
-                      <p class="card-text">
-                        <strong>Start Date:</strong> <%= booking.first_day %><br>
-                        <strong>End Date:</strong> <%= booking.last_day %>
-                      </p>
-                      <div>
-                        <%= link_to 'Edit', edit_place_booking_path(place, booking), class: "btn btn-secondary" %>
-                        <%= link_to 'Delete', place_booking_path(place, booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
-                      </div>
-                    </div>
-                  </div>
-                <% end %>
-              </div>
-            <% else %>
-              <h3>
-                <button class="btn btn-secondary" disabled>No bookings</button>
-              </h3>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    <% end %>
+<div class="container pt-100 mt-100">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a class="nav-link active" id="bookings-tab" data-bs-toggle="tab" href="#bookings" role="tab" aria-controls="bookings" aria-selected="true">My Bookings</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="places-tab" data-bs-toggle="tab" href="#places" role="tab" aria-controls="places" aria-selected="false">My Places</a>
+  </li>
+  <li class="nav-item ms-auto" role="presentation">
+    <a class="nav-link" id="add-place-tab" data-bs-toggle="tab" href="#add-place" role="tab" aria-controls="add-place" aria-selected="false">Add a Place</a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="bookings" role="tabpanel" aria-labelledby="bookings-tab">
+    <div class="container pt-4 mt-4">
+      <h2>My Bookings</h2>
+      <%= render 'shared/bookingcardtrip' %>
+    </div>
   </div>
-
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" class="btn btn-flat" data-bs-toggle="modal" data-bs-target="#new_movie_modal">
-        add a place
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="new_movie_modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Add a new place <%= @place.address_country %> list</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-        </button>
-      </div>
-        <div class="modal-body">
-  <%= simple_form_for (@place) do |f| %>
-    <div class="form-inputs">
-      <%= f.label :address_country %>
-      <%= f.text_field :address_country %>
+  <div class="tab-pane fade" id="places" role="tabpanel" aria-labelledby="places-tab">
+    <div class="container pt-4 mt-4">
+      <h2>My Places</h2>
+      <%= render 'shared/placecardtrip' %>
     </div>
-    <div class="form-inputs">
-      <%= f.label :address_city %>
-      <%= f.text_field :address_city %>
-    </div>
-    <div class="form-inputs">
-      <%= f.label :address_street_name %>
-      <%= f.text_field :address_street_name %>
-    </div>
-    <div class="form-inputs">
-      <%= f.label :address_zip_code %>
-      <%= f.text_field :address_zip_code %>
-    </div>
-    <div class="form-inputs">
-      <%= f.label :screen_number %>
-      <%= f.number_field :screen_number %>
-    </div>
-    <div class="form-inputs">
-      <%= f.label :desk_number %>
-      <%= f.number_field :desk_number %>
-    </div>
-    <div class="form-inputs">
-      <%= f.label :bed_number %>
-      <%= f.number_field :bed_number %>
-    </div>
-    <div class="form-inputs">
-      <%= f.label :internet_speed %>
-      <%= f.number_field :internet_speed, step: :any %>
-    </div>
-    <div class="form-inputs">
-      <%= f.label :outdoor %>
-      <%= f.check_box :outdoor %>
-    </div>
-    <div class="form-inputs">
-      <%= f.label :air_conditionning %>
-      <%= f.check_box :air_conditionning %>
-    </div>
-    <div class="form-inputs">
-      <%= f.label :price_per_day %>
-      <%= f.number_field :price_per_day, step: :any %>
-    </div>
-     <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-    <div class="actions">
-      <%= f.submit 'Create Place', class: "btn btn-primary" %>
-    </div>
-  <% end %>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Back</button>
-        </div>
+  </div>
+  <div class="tab-pane fade" id="add-place" role="tabpanel" aria-labelledby="add-place-tab">
+    <div class="container pt-4 mt-4 d-flex justify-content-end">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#new_movie_modal">
+        Add a Place
+      </button>
+      <%= render 'shared/addplacemodal' %>
     </div>
   </div>
 </div>
-
-
-
 
 </div>
