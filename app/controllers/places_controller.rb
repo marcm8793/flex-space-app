@@ -1,10 +1,46 @@
 class PlacesController < ApplicationController
   before_action :authenticate_user!
   def index
+    @places = Place.all
+
     if params[:query].present?
-      @places = Place.where('address_city ILIKE ? OR address_country ILIKE ?', "%#{params[:query]}%", "%#{params[:query]}%")
-    else
-      @places = Place.all
+      @places = @places.where('address_city ILIKE ? OR address_country ILIKE ?', "%#{params[:query]}%", "%#{params[:query]}%")
+    end
+
+    if params[:address_country].present?
+      @places = @places.where('address_country ILIKE ?', "%#{params[:address_country]}%")
+    end
+
+    if params[:address_city].present?
+      @places = @places.where('address_city ILIKE ?', "%#{params[:address_city]}%")
+    end
+
+    if params[:internet_speed].present?
+      @places = @places.where('internet_speed >= ?', params[:internet_speed].to_f)
+    end
+
+    if params[:price_per_day].present?
+      @places = @places.where('price_per_day <= ?', params[:price_per_day].to_f)
+    end
+
+    if params[:screen_number].present?
+      @places = @places.where('screen_number >= ?', params[:screen_number].to_i)
+    end
+
+    if params[:desk_number].present?
+      @places = @places.where('desk_number >= ?', params[:desk_number].to_i)
+    end
+
+    if params[:bed_number].present?
+      @places = @places.where('bed_number >= ?', params[:bed_number].to_i)
+    end
+
+    if params[:outdoor].present?
+      @places = @places.where(outdoor: true)
+    end
+
+    if params[:air_conditionning].present?
+      @places = @places.where(air_conditionning: true)
     end
   end
 

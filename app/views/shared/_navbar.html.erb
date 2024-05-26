@@ -27,6 +27,9 @@
             <%= submit_tag "Search", class: "btn btn-outline-success" %>
           <% end %>
         </div>
+        <div class="d-flex align-items-center ms-3">
+          <i class="fa-solid fa-filter" data-bs-toggle="modal" data-bs-target="#filterModal" style="cursor: pointer;"></i>
+        </div>
         <% if user_signed_in? %>
           <li class="nav-item">
             <%= link_to trip_path, class: "nav-link" do%>
@@ -48,6 +51,72 @@
           </li>
         <% end %>
       </ul>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="filterModalLabel">Filter Places</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with url: places_path, method: :get, local: true, data: { controller: "range" } do %>
+          <div class="mb-3">
+            <%= label_tag :address_country, "Country" %>
+            <%= text_field_tag :address_country, params[:address_country], class: "form-control" %>
+          </div>
+          <div class="mb-3">
+            <%= label_tag :address_city, "City" %>
+            <%= text_field_tag :address_city, params[:address_city], class: "form-control" %>
+          </div>
+          <div class="mb-3">
+            <%= label_tag :internet_speed, "Internet Speed (Mbps)" %>
+            <%= number_field_tag :internet_speed, params[:internet_speed], class: "form-control" %>
+          </div>
+          <div class="mb-3">
+            <%= label_tag :price_per_day, "Max Price per Day" %>
+            <%= number_field_tag :price_per_day, params[:price_per_day], class: "form-control" %>
+          </div>
+          <div class="mb-3">
+            <%= label_tag :bed_number, "Number of Beds", class: "form-label" %>
+            <input type="range" class="form-range" id="bedNumberRange" name="bed_number" value="<%= params[:bed_number] || 1 %>" min="1" max="10" data-action="input->range#handleInput" data-range-target="range">
+            <div class="d-flex justify-content-center w-100">
+              <output class="text-center" id="bedNumberOutput" data-range-target="output"><%= params[:bed_number] || 1 %></output>
+            </div>
+          </div>
+          <div class="mb-3">
+            <%= label_tag :desk_number, "Number of Desks", class: "form-label" %>
+            <input type="range" class="form-range" id="deskNumberRange" name="desk_number" value="<%= params[:desk_number] || 1 %>" min="1" max="10" data-action="input->range#handleInput" data-range-target="range">
+            <div class="d-flex justify-content-center w-100">
+              <output class="text-center" id="deskNumberOutput" data-range-target="output"><%= params[:desk_number] || 1 %></output>
+            </div>
+          </div>
+          <div class="mb-3">
+            <%= label_tag :screen_number, "Number of Screens", class: "form-label" %>
+            <input type="range" class="form-range" id="screenNumberRange" name="screen_number" value="<%= params[:screen_number] || 1 %>" min="1" max="10" data-action="input->range#handleInput" data-range-target="range">
+            <div class="d-flex justify-content-center w-100">
+              <output class="text-center" id="screenNumberOutput" data-range-target="output"><%= params[:screen_number] || 1 %></output>
+            </div>
+          </div>
+          <div class="mb-3 form-check">
+            <%= check_box_tag :outdoor, '1', params[:outdoor].present?, class: "form-check-input" %>
+            <%= label_tag :outdoor, "Outdoor Space", class: "form-check-label" %>
+          </div>
+          <div class="mb-3 form-check">
+            <%= check_box_tag :air_conditionning, '1', params[:air_conditionning].present?, class: "form-check-input" %>
+            <%= label_tag :air_conditionning, "Air Conditioning", class: "form-check-label" %>
+          </div>
+          <div class="modal-footer">
+            <%= submit_tag "Apply Filters", class: "btn btn-primary" %>
+            <%= link_to "Reset Filters", places_path, class: "btn btn-secondary" %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

@@ -29,7 +29,7 @@
               <% end %>
             </div>
           </div>
-          <div class="card-footer">
+          <div class="card-footer justify-content-center">
             <% if place.bookings.any? %>
               <h3>
                 <a class="btn btn-secondary" data-bs-toggle="collapse" href="#bookings-<%= place.id %>" role="button" aria-expanded="false" aria-controls="bookings-<%= place.id %>">
@@ -41,6 +41,7 @@
                   <div class="card mt-2">
                     <div class="card-body">
                       <p class="card-text">
+                        <strong>Booked by:</strong> <%= booking.user.first_name %> <%= booking.user.last_name %><br>
                         <strong>Start Date:</strong> <%= booking.first_day %><br>
                         <strong>End Date:</strong> <%= booking.last_day %>
                       </p>
