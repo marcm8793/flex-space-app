@@ -80,10 +80,16 @@ class PlacesController < ApplicationController
 
   def destroy
     @place = Place.find(params[:id])
-    @place.destroy
-    redirect_to places_path
-    flash[:success] = "You successfully deleted your place!"
+    if @place.bookings.any?
+      redirect_to trip_path
+      flash[:danger] = "You can't delete a place with bookings!"
+    else
+      @place.destroy
+      redirect_to places_path
+      flash[:success] = "You successfully deleted your place!"
+    end
   end
+
 
   private
 
