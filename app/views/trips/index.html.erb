@@ -7,6 +7,9 @@
       <li class="nav-item" role="presentation">
         <a class="nav-link" id="places-tab" data-bs-toggle="tab" href="#places" role="tab" aria-controls="places" aria-selected="false">My Places</a>
       </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="favorites-tab" data-bs-toggle="tab" href="#favorites" role="tab" aria-controls="favorites" aria-selected="false">My Favorites</a>
+      </li>
     </div>
     <li class="nav-item" role="presentation">
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#new_movie_modal">
@@ -26,6 +29,12 @@
       <div class="container pt-4 mt-4">
         <h2>My Places</h2>
         <%= render 'shared/placecardtrip' %>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="favorites" role="tabpanel" aria-labelledby="favorites-tab">
+      <div class="container pt-4 mt-4">
+        <h2>My Favorites</h2>
+        <%= render 'shared/favoritecardtrip' %>
       </div>
     </div>
   </div>

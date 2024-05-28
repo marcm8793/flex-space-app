@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   resources :places do
     resources :bookings
+    post "favorite", to: "favorites#create"
+    delete "favorite", to: "favorites#destroy"
   end
+
+
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

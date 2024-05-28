@@ -2,6 +2,8 @@ class Place < ApplicationRecord
   belongs_to :user
   has_many :bookings
   has_many_attached :photos, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_by, through: :favorites, source: :user
 
   validates :address_country, presence: true
   validates :address_city, presence: true
@@ -16,4 +18,9 @@ class Place < ApplicationRecord
   validates :price_per_day, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :user, presence: true
   validates :photos, presence: true
+
+  def favorited_by?(user)
+    favorited_by.include?(user)
+  end
+
 end
