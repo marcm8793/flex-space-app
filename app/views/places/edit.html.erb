@@ -3,7 +3,7 @@
 <%= simple_form_for @place do |f| %>
   <div class="field">
     <%= f.label :address_country %>
-    <%= f.text_field :address_country %>
+    <%= f.text_field :address_country, required: true %>
   </div>
 
   <div class="field">

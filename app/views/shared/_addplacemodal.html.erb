@@ -19,33 +19,33 @@
               </div>
               <div class="form-inputs">
                 <%= f.label :address_city %>
-                <%= f.text_field :address_city, id: 'address_city', class: 'form-control', data: { bulk_data_target: 'addressCity' } %>
+                <%= f.text_field :address_city, id: 'address_city', class: 'form-control', data: { bulk_data_target: 'addressCity' }, required: true %>
               </div>
               <div class="form-inputs">
                 <%= f.label :address_street_name %>
-                <%= f.text_field :address_street_name, id: 'address_street_name', class: 'form-control', data: { bulk_data_target: 'addressStreetName' } %>
+                <%= f.text_field :address_street_name, id: 'address_street_name', class: 'form-control', data: { bulk_data_target: 'addressStreetName' }, required: true %>
               </div>
               <div class="form-inputs">
                 <%= f.label :address_zip_code %>
-                <%= f.text_field :address_zip_code, id: 'address_zip_code', class: 'form-control', data: { bulk_data_target: 'addressZipCode' } %>
+                <%= f.text_field :address_zip_code, id: 'address_zip_code', class: 'form-control', data: { bulk_data_target: 'addressZipCode' }, required: true %>
               </div>
               <div class="form-inputs">
                 <%= f.label :screen_number %>
-                <%= f.number_field :screen_number, id: 'screen_number', class: 'form-control', data: { bulk_data_target: 'screenNumber' } %>
+                <%= f.number_field :screen_number, id: 'screen_number', class: 'form-control', data: { bulk_data_target: 'screenNumber' }, required: true %>
               </div>
               <div class="form-inputs">
                 <%= f.label :desk_number %>
-                <%= f.number_field :desk_number, id: 'desk_number', class: 'form-control', data: { bulk_data_target: 'deskNumber' } %>
+                <%= f.number_field :desk_number, id: 'desk_number', class: 'form-control', data: { bulk_data_target: 'deskNumber' }, required: true %>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-inputs">
                 <%= f.label :bed_number %>
-                <%= f.number_field :bed_number, id: 'bed_number', class: 'form-control', data: { bulk_data_target: 'bedNumber' } %>
+                <%= f.number_field :bed_number, id: 'bed_number', class: 'form-control', data: { bulk_data_target: 'bedNumber' }, required: true %>
               </div>
               <div class="form-inputs">
                 <%= f.label :internet_speed %>
-                <%= f.number_field :internet_speed, step: :any, id: 'internet_speed', class: 'form-control', data: { bulk_data_target: 'internetSpeed' } %>
+                <%= f.number_field :internet_speed, step: :any, id: 'internet_speed', class: 'form-control', data: { bulk_data_target: 'internetSpeed' }, required: true %>
               </div>
               <div class="form-inputs">
                 <%= f.label :outdoor %>
@@ -57,7 +57,7 @@
               </div>
               <div class="form-inputs">
                 <%= f.label :price_per_day %>
-                <%= f.number_field :price_per_day, step: :any, id: 'price_per_day', class: 'form-control', data: { bulk_data_target: 'pricePerDay' } %>
+                <%= f.number_field :price_per_day, step: :any, id: 'price_per_day', class: 'form-control', data: { bulk_data_target: 'pricePerDay' }, required: true %>
               </div>
               <div class="form-inputs">
                 <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'form-control' } %>

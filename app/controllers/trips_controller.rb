@@ -7,4 +7,10 @@ class TripsController < ApplicationController
     @place = Place.new
   end
 
+  private
+
+  def list_params
+    params.require(:trip).permit!
+  end
+
 end

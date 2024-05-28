@@ -59,7 +59,7 @@ class PlacesController < ApplicationController
       redirect_to place_path(@place)
       flash[:success] = "You successfully created a new place!"
     else
-      render :new, status: :unprocessable_entity
+      render partial: "shared/addplacemodal", status: :unprocessable_entity
     end
   end
 
