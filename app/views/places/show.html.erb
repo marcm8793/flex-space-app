@@ -47,7 +47,11 @@
                 <% end %>
                 </li>
             </ul>
+            <div>
+              <%= @place.description.html_safe %>
+            </div>
           </div>
+
           <div class="col-6 col-md-4">
           </div>
           <div class="col-6 col-md-4" data-controller="compute-price" data-compute-price-fee-value="<%= @place.price_per_day.round %>">
