@@ -85,11 +85,10 @@ class PlacesController < ApplicationController
       flash[:danger] = "You can't delete a place with bookings!"
     else
       @place.destroy
-      redirect_to places_path
+      redirect_to trip_path
       flash[:success] = "You successfully deleted your place!"
     end
   end
-
 
   private
 

@@ -2,10 +2,6 @@ Rails.application.routes.draw do
   devise_for :users
   resource :user, only: [:edit, :update]
 
-  authenticated :user do
-    get '/trip', to: 'trips#index'
-  end
-
   root to: "places#index"
 
   get "up" => "rails/health#show", as: :rails_health_check
