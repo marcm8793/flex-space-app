@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resource :user, only: [:edit, :update]
 
   root to: "places#index"
+    get '/trip', to: 'trips#index'
 
   get "up" => "rails/health#show", as: :rails_health_check
   resources :places do
