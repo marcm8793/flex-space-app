@@ -6,10 +6,10 @@
           <button type="button" data-bs-target="#carouselExampleIndicators-<%= place.id %>" data-bs-slide-to="<%= index %>" class="<%= 'active' if index == 0 %>" aria-current="<%= 'true' if index == 0 %>" aria-label="Slide <%= index + 1 %>"></button>
         <% end %>
       </div>
-      <div class="carousel-inner">
+      <div class="carousel-inner" style="border-radius: 5%; height: 400px;">
         <% place.photos.each_with_index do |photo, index| %>
-          <div class="carousel-item <%= 'active' if index == 0 %>">
-            <%= image_tag(photo, class: 'd-block w-100', alt: "Slide #{index + 1}", style: 'height: 250px; object-fit: cover; border-radius: 5%;') %>
+          <div class="carousel-item <%= 'active' if index == 0 %>" style="height: 100%;">
+            <%= cl_image_tag(photo.key, alt: "Slide #{index + 1}", style: "object-fit: cover; width: 100%; height: 100%; border-radius: 5%;") %>
           </div>
         <% end %>
       </div>
@@ -22,20 +22,16 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-  <div class="card-body" style='height: 120px;'>
-    <div class="card-title">
-      <p class="ms-0"><strong><%= place.address_city %>, <%= place.address_country %></strong></p>
+    <div class="card-body" style="height: 120px;">
+      <div class="card-title" style="height: 40px;">
+        <p class="ms-0" style="margin: 0; line-height: 40px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><strong><%= place.address_city %>, <%= place.address_country %></strong></p>
+      </div>
+      <div class="d-flex justify-content-between align-items-center w-100">
+        <span style="height: 20px; line-height: 20px;">🖥️ <%= place.screen_number %></span>
+        <span style="height: 20px; line-height: 20px;">€ <%= place.price_per_day %></span>
+        <span style="height: 20px; line-height: 20px;">🛏️ <%= place.bed_number %></span>
+        <span style="height: 20px; line-height: 20px;">🛜 <%= place.internet_speed %></span>
+      </div>
     </div>
-    <div class="d-flex justify-content-between align-items-center w-100">
-
-        <span>🖥️ <%= place.screen_number %></span>
-        <span>€ <%= place.price_per_day %></span>
-
-
-        <span>🛏️ <%= place.bed_number %></span>
-        <span>🛜 <%= place.internet_speed %></span>
-
-    </div>
-  </div>
   <% end %>
 </div>
