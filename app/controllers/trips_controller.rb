@@ -5,6 +5,7 @@ class TripsController < ApplicationController
     @places = current_user.places
     @bookings = current_user.bookings
     @place = Place.new
+    @favorite_places = current_user.favorite_places
   end
 
 end

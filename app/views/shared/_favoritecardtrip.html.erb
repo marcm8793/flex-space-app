@@ -1,0 +1,24 @@
+<div class="row">
+  <% @favorite_places.each do |place| %>
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title"><%= place.address_city %>, <%= place.address_country %></h5>
+          <p class="card-text">
+            <strong>Zip Code:</strong> <%= place.address_zip_code %><br>
+            <strong>Screen Number:</strong> <%= place.screen_number %><br>
+            <strong>Desk Number:</strong> <%= place.desk_number %><br>
+            <strong>Bed Number:</strong> <%= place.bed_number %><br>
+            <strong>Internet Speed:</strong> <%= place.internet_speed %> Mbps<br>
+            <strong>Outdoor:</strong> <%= place.outdoor ? '✓' : '✗' %><br>
+            <strong>Air Conditioning:</strong> <%= place.air_conditionning ? '✓' : '✗' %><br>
+            <strong>Price Per Day:</strong> $<%= place.price_per_day %>
+          </p>
+          <div>
+            <%= link_to 'View', place_path(place), class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

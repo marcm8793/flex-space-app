@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_25_105150) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_28_174306) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,6 +53,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_25_105150) do
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "place_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["place_id"], name: "index_favorites_on_place_id"
+    t.index ["user_id", "place_id"], name: "index_favorites_on_user_id_and_place_id", unique: true
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "places", force: :cascade do |t|
     t.string "address_country"
     t.string "address_city"
@@ -89,5 +99,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_25_105150) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookings", "places"
   add_foreign_key "bookings", "users"
+  add_foreign_key "favorites", "places"
+  add_foreign_key "favorites", "users"
   add_foreign_key "places", "users"
 end
