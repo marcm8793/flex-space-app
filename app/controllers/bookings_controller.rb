@@ -11,7 +11,7 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     @booking.place = @place
     if @booking.save
-      redirect_to root_path
+      redirect_to trip_path
       flash[:success] = "You successfully booked your trip!"
     else
       render :new
@@ -25,7 +25,7 @@ class BookingsController < ApplicationController
   def update
     @booking = Booking.find(params[:id])
     if @booking.update(booking_params)
-      redirect_to places_path
+      redirect_to trip_path
       flash[:success] = "You successfully updated your booking!"
     else
       render :edit
@@ -36,7 +36,7 @@ class BookingsController < ApplicationController
     @place = current_user.places.find_by(id: params[:place_id])
     @booking = Booking.find(params[:id])
     @booking.destroy
-    redirect_to places_path
+    redirect_to trip_path
     flash[:success] = "You successfully deleted your booking!"
   end
 
