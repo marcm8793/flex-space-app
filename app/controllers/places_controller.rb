@@ -53,7 +53,7 @@ class PlacesController < ApplicationController
   end
 
   def create
-    @place = Place.new(list_params)
+    @place = Place.new(place_params)
     @place.user = current_user
     if @place.save
       redirect_to place_path(@place)
@@ -69,7 +69,7 @@ class PlacesController < ApplicationController
 
   def update
     @place = Place.find(params[:id])
-    if @place.update(list_params)
+    if @place.update(place_params)
       redirect_to place_path(@place)
       flash[:success] = "You successfully updated your place!"
     else
@@ -91,7 +91,8 @@ class PlacesController < ApplicationController
 
   private
 
-  def list_params
-    params.require(:place).permit!
+  def place_params
+    params.require(:place).permit(:address_country, :address_city, :address_street_name, :address_zip_code, :screen_number,
+    :desk_number, :bed_number, :internet_speed, :outdoor, :air_conditionning, :price_per_day)
   end
 end

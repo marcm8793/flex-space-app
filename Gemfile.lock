@@ -114,6 +114,10 @@ GEM
       faraday-multipart (~> 1.0, >= 1.0.4)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
+    countries (6.0.1)
+      unaccent (~> 0.3)
+    country_select (9.0.0)
+      countries (> 5.0, < 7.0)
     crass (1.0.6)
     date (3.3.4)
     debug (1.9.2)
@@ -291,6 +295,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    unaccent (0.4.0)
     uri (0.13.0)
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -323,6 +328,7 @@ DEPENDENCIES
   bootstrap (~> 5.2)
   capybara
   cloudinary
+  country_select
   debug
   devise
   dotenv-rails
