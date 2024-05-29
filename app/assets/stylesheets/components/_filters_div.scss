@@ -1,0 +1,33 @@
+.filters-summary {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  width: 180px;
+  padding: 10px;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  z-index: 1000;
+  font-size: 0.9em;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.filters-summary h5 {
+  font-size: 1em;
+}
+
+.filters-summary ul {
+  padding-left: 15px;
+}
+
+.filters-summary .btn {
+  font-size: 0.8em;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.filters-summary .btn-group {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}

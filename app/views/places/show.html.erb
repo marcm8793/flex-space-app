@@ -47,8 +47,13 @@
                 <% end %>
                 </li>
             </ul>
+            <hr class="my-4">
             <div>
-              <%= @place.description.html_safe %>
+              <% if @place.description.present? %>
+                <p><%= @place.description.html_safe %></p>
+              <% else %>
+                <p>There is no description for this place</p>
+              <% end %>
             </div>
           </div>
 

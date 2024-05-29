@@ -1,6 +1,6 @@
-height: 500
+height: 200
 menubar: false
 toolbar:
-  - undo redo | blocks | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | removeformat | help
+  - undo redo | blocks | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | emoticons | removeformat
 plugins:
-  - insertdatetime lists media table code help wordcount
+  - insertdatetime lists media table code wordcount emoticons
