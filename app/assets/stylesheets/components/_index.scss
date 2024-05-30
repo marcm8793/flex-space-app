@@ -1,4 +1,5 @@
 // Import your components CSS files here.
+@import "address_autocomplete";
 @import "alert";
 @import "avatar";
 @import "form_legend_clear";
@@ -6,6 +7,7 @@
 @import "flash";
 @import "footer";
 @import "filters_div";
+@import "map_container";
 
 body {
   padding-top: 88px;
