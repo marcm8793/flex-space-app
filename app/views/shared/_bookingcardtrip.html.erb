@@ -1,7 +1,7 @@
   <div class="row">
     <% @bookings.each do |booking| %>
       <div class="col-md-4">
-        <div class="card mb-4">
+        <div class="card mb-4" style="border-radius: 5%; position: relative;">
           <div class="card-body">
             <h5 class="card-title"><%= booking.place.address_street_name %>, <%= booking.place.address_city %>, <%= booking.place.address_country %></h5>
             <p class="card-text">
@@ -17,8 +17,8 @@
               <strong>Price Per Day:</strong> $<%= booking.place.price_per_day %>
             </p>
             <div>
-              <%= link_to 'Edit', edit_place_booking_path(booking.place, booking), class: 'btn btn-secondary' %>
-              <%= link_to 'Delete', place_booking_path(booking.place, booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+              <%= link_to 'Edit', edit_place_booking_path(booking.place, booking), class: 'btn btn-outline-secondary' %>
+              <%= link_to 'Delete', place_booking_path(booking.place, booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-outline-danger" %>
             </div>
           </div>
         </div>
