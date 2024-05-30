@@ -53,13 +53,13 @@ class PlacesController < ApplicationController
   end
 
   def create
-    @place = Place.new(list_params)
+    @place = Place.new(place_params)
     @place.user = current_user
     if @place.save
       redirect_to place_path(@place)
       flash[:success] = "You successfully created a new place!"
     else
-      render :new, status: :unprocessable_entity
+      render partial: "shared/addplacemodal", status: :unprocessable_entity
     end
   end
 
@@ -69,7 +69,7 @@ class PlacesController < ApplicationController
 
   def update
     @place = Place.find(params[:id])
-    if @place.update(list_params)
+    if @place.update(place_params)
       redirect_to place_path(@place)
       flash[:success] = "You successfully updated your place!"
     else
@@ -91,7 +91,7 @@ class PlacesController < ApplicationController
 
   private
 
-  def list_params
+  def place_params
     params.require(:place).permit!
   end
 end
