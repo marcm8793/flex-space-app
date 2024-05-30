@@ -1,7 +1,7 @@
   <div class="row">
     <% @places.each do |place| %>
       <div class="col-md-4">
-        <div class="card mb-4">
+        <div class="card mb-4" style="border-radius: 5%; position: relative;">
           <div class="card-body">
             <div class="card-title">
               <h5><%= place.address_city %>, <%= place.address_country %></h5>
@@ -18,21 +18,21 @@
               <strong>Price Per Day:</strong> $<%= place.price_per_day %>
             </p>
             <div>
-              <%= link_to 'Edit', edit_place_path(place), class: "btn btn-primary" %>
+              <%= link_to 'Edit', edit_place_path(place), class: "btn btn-outline-primary" %>
               <% if place.bookings.any? %>
-                <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Tooltip on top" disabled>
+                <button class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Tooltip on top" disabled>
                   Delete
                 </button>
                  <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="Can not delete places if you have bookings"></i>
               <% else %>
-                <%= link_to 'Delete', place_path(place), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+                <%= link_to 'Delete', place_path(place), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-outline-danger" %>
               <% end %>
             </div>
           </div>
           <div class="card-footer justify-content-center">
             <% if place.bookings.any? %>
               <h3>
-                <a class="btn btn-secondary" data-bs-toggle="collapse" href="#bookings-<%= place.id %>" role="button" aria-expanded="false" aria-controls="bookings-<%= place.id %>">
+                <a class="btn btn-outline-secondary" data-bs-toggle="collapse" href="#bookings-<%= place.id %>" role="button" aria-expanded="false" aria-controls="bookings-<%= place.id %>">
                   Show Bookings
                 </a>
               </h3>
@@ -55,7 +55,7 @@
               </div>
             <% else %>
               <h3>
-                <button class="btn btn-secondary" disabled>No bookings</button>
+                <button class="btn btn-outline-secondary" disabled>No bookings</button>
               </h3>
             <% end %>
           </div>
