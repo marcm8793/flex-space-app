@@ -21,3 +21,18 @@
   </div>
 
 </div>
+
+<% if @applied_filters.present? %>
+  <div class="filters-summary">
+    <h5>Applied Filters:</h5>
+    <ul>
+      <% @applied_filters.each do |key, value| %>
+        <li><strong><%= key.to_s.humanize %>:</strong> <%= value %></li>
+      <% end %>
+    </ul>
+    <div class="btn-group">
+      <%= link_to "Reset", places_path, class: "btn btn-secondary btn-sm" %>
+      <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#filterModal">Modify</button>
+    </div>
+  </div>
+<% end %>

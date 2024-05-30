@@ -23,7 +23,7 @@
         </div>
         <div style="display: none;" data-search-target="searchForm" id="searchForm">
           <%= form_with url: places_path, method: :get, class:"d-flex ms-2" do %>
-            <%= text_field_tag :query, params[:query], class: "form-control me-2", placeholder: "Search places", data: { search_target: "searchInput" } %>
+            <%= text_field_tag :places_searched, params[:places_searched,], class: "form-control me-2", placeholder: "Search places", data: { search_target: "searchInput" } %>
             <%= submit_tag "Search", class: "btn btn-outline-success" %>
           <% end %>
         </div>

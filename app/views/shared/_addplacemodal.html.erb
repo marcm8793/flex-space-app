@@ -64,6 +64,11 @@
               </div>
             </div>
           </div>
+          <div class="form-inputs mb-3">
+            <%= f.label :description %>
+            <%= f.text_area :description, class: 'form-control tinymce w-100' %>
+            <%= tinymce %>
+          </div>
           <div class="actions d-flex justify-content-center mt-3">
             <%= f.submit 'Create Place', class: "btn btn-primary w-100" %>
           </div>

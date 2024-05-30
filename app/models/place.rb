@@ -18,6 +18,7 @@ class Place < ApplicationRecord
   validates :price_per_day, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :user, presence: true
   validates :photos, presence: true
+  validates :description, presence: true
 
   def favorited_by?(user)
     favorited_by.include?(user)

@@ -47,7 +47,16 @@
                 <% end %>
                 </li>
             </ul>
+            <hr class="my-4">
+            <div>
+              <% if @place.description.present? %>
+                <p><%= @place.description.html_safe %></p>
+              <% else %>
+                <p>There is no description for this place</p>
+              <% end %>
+            </div>
           </div>
+
           <div class="col-6 col-md-4">
           </div>
           <div class="col-6 col-md-4" data-controller="compute-price" data-compute-price-fee-value="<%= @place.price_per_day.round %>">
