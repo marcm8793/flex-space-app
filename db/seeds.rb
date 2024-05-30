@@ -49,6 +49,7 @@ last_name: "Mabelle"
     outdoor: false,
     air_conditionning: false,
     price_per_day: rand(1..500),
+    description: Faker::Lorem.paragraph,
     user: User.all.sample
   )
 
