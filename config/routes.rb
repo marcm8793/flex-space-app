@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'maps/show'
   devise_for :users
   resource :user, only: [:edit, :update]
 
@@ -12,7 +13,7 @@ Rails.application.routes.draw do
     delete "favorite", to: "favorites#destroy"
   end
 
-
+  get 'map', to: 'maps#show'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

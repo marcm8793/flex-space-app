@@ -27,13 +27,18 @@
             <%= submit_tag "Search", class: "btn btn-outline-success" %>
           <% end %>
         </div>
-        <div class="d-flex align-items-center ms-3">
+        <div class="d-flex align-items-center ms-3 me-4">
           <i class="fa-solid fa-filter" data-bs-toggle="modal" data-bs-target="#filterModal" style="cursor: pointer;"></i>
+        </div>
+        <div>
+          <%= link_to map_path, class: "nav-link" do %>
+            <%= image_tag "earthnavbar.svg", alt: "earth logo", width: "25", height: "25", style:"cursor: pointer;" %>
+          <% end %>
         </div>
         <% if user_signed_in? %>
           <li class="nav-item">
             <%= link_to trip_path, class: "nav-link" do%>
-              <%= image_tag "Backpack.svg", alt: "backpack logo" %>
+              <%= image_tag "Backpack.svg", alt: "backpack logo", width: "25", height: "25", style:"cursor: pointer;" %>
               <span>Trips</span>
             <% end %>
           </li>
