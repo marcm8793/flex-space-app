@@ -1,7 +1,6 @@
-<div class="container pt-3">
+<div class="container">
   <h3><%= @place.address_city %>, <%= @place.address_country %></h3>
   <div class="row">
-    <!-- Image Carousel on the Left -->
     <div class="col-md-6">
       <div id="carouselExampleIndicators-<%= @place.id %>" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -34,10 +33,9 @@
       </div>
     </div>
   </div>
-
-  <h4>Ce que <%= @place.user.first_name %> vous propose</h4>
-  <div class="row">
-    <div class="col-12 col-md-4">
+  <div class = "row">
+    <div class="col-4">
+      <h4>Ce que <%= @place.user.first_name %> vous propose</h4>
       <ul class="list-group list-group-flush">
         <li class="list-group-item"><i class="fa-solid fa-desktop"></i> <%= @place.screen_number %> Screen</li>
         <li class="list-group-item"><i class="fa-solid fa-chair"></i> <%= @place.desk_number %> Desk</li>
@@ -58,8 +56,33 @@
           <% end %>
         </li>
       </ul>
-      <hr class="my-4">
-      <div>
+    </div>
+
+    <div class="col-4">
+    </div>
+      <div class="col-4" data-controller="compute-price" data-compute-price-fee-value="<%= @place.price_per_day.round %>">
+        <h4><%= @place.price_per_day.round %> € per day</h4>
+          <%= simple_form_for [@place, @booking] do |f| %>
+            <div class="form-inputs">
+              <%= f.label :first_day %>
+              <%= f.date_field :first_day, data: { compute_price_target: "firstDay" } %>
+            </div>
+            <div class="form-inputs" data-action="change->compute-price#compute">
+              <%= f.label :last_day %>
+              <%= f.date_field :last_day, data: { compute_price_target: "lastDay" } %>
+            </div>
+            <div class="btn form-actions">
+              <%= f.submit %>
+            </div>
+          <% end %>
+         <div data-compute-price-target="priceElement">
+           <p>Réservation pour <span data-compute-price-target="totalDays">0</span> jours</p>
+           <p>Prix total : <span data-compute-price-target="totalPrice">0</span> € </p>
+          </div>
+        </div>
+        <hr class="my-8">
+      </div>
+      <div class="col-8" >
         <% if @place.description.present? %>
           <p><%= @place.description.html_safe %></p>
         <% else %>
@@ -67,29 +90,3 @@
         <% end %>
       </div>
     </div>
-
-    <div class="col-12 col-md-4">
-    </div>
-
-    <div class="col-12 col-md-4" data-controller="compute-price" data-compute-price-fee-value="<%= @place.price_per_day.round %>">
-      <h4><%= @place.price_per_day.round %> € per day</h4>
-      <%= simple_form_for [@place, @booking] do |f| %>
-        <div class="form-inputs">
-          <%= f.label :first_day %>
-          <%= f.date_field :first_day, data: { compute_price_target: "firstDay" } %>
-        </div>
-        <div class="form-inputs" data-action="change->compute-price#compute">
-          <%= f.label :last_day %>
-          <%= f.date_field :last_day, data: { compute_price_target: "lastDay" } %>
-        </div>
-        <div class="btn form-actions">
-          <%= f.submit %>
-        </div>
-      <% end %>
-      <div data-compute-price-target="priceElement">
-        <p>Réservation pour <span data-compute-price-target="totalDays">0</span> jours</p>
-        <p>Prix total : <span data-compute-price-target="totalPrice">0</span> € </p>
-      </div>
-    </div>
-  </div>
-</div>
