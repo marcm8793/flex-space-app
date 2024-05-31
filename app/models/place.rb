@@ -20,8 +20,21 @@ class Place < ApplicationRecord
   validates :photos, presence: true
   validates :description, presence: true
 
+  geocoded_by :full_address
+  after_validation :geocode, if: :address_changed?
+
   def favorited_by?(user)
     favorited_by.include?(user)
+  end
+
+  def full_address
+    [address_street_name, address_city, address_zip_code, address_country].compact.join(', ')
+  end
+
+  private
+
+  def address_changed?
+    address_street_name_changed? || address_city_changed? || address_zip_code_changed? || address_country_changed?
   end
 
 end

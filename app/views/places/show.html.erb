@@ -1,82 +1,92 @@
 <div class="container">
   <h3><%= @place.address_city %>, <%= @place.address_country %></h3>
-    <div class="d-flex justify-content-center p-4">
-          <div id="carouselExampleIndicators-<%= @place.id %>" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <% @place.photos.each_with_index do |photo, index| %>
-          <button type="button" data-bs-target="#carouselExampleIndicators-<%= @place.id %>" data-bs-slide-to="<%= index %>" class="<%= 'active' if index == 0 %>" aria-current="<%= 'true' if index == 0 %>" aria-label="Slide <%= index + 1 %>"></button>
-        <% end %>
-      </div>
-      <div class="carousel-inner" style="height: 500px; width: 1000px; border-radius:5%">
-        <% @place.photos.each_with_index do |photo, index| %>
-          <div class="carousel-item <%= 'active' if index == 0 %>" style="height: 500px; width: 1000px;">
-            <%= cl_image_tag(photo.key, width: 400, height: 400, class: 'd-block w-100', alt: "Slide #{index + 1}", style: "object-fit: cover; width: 100%; height: 100%; border-radius:5%;") %>
-          </div>
-        <% end %>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators-<%= @place.id %>" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators-<%= @place.id %>" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-    </div>
-      <div class = "row">
-          <div class="col-4">
-           <h4>Ce que <%= @place.user.first_name %> vous propose</h4>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"><i class="fa-solid fa-desktop"></i> <%= @place.screen_number %> Screen</li>
-                <li class="list-group-item"><i class="fa-solid fa-chair"></i> <%= @place.desk_number %> Desk</li>
-                <li class="list-group-item"><i class="fa-solid fa-bed"></i> <%= @place.bed_number %> Bed</li>
-                <li class="list-group-item"><i class="fa-solid fa-wifi"></i> Wifi speed <%= @place.internet_speed %> Mbit/s </li>
-                <li class="list-group-item"><i class="fa-regular fa-snowflake"></i>
-                  <% if @place.air_conditionning = "True" %>
-                    <%= "Air Conditioning" %>
-                    <% else %>
-                    <strike><%= "Air Conditioning" %></strike>
-                  <% end %>
-                </li>
-                <li class="list-group-item"><i class="fa-solid fa-sun"></i>
-                <% if @place.outdoor = "True" %>
-                  <%= "Outdoor" %>
-                  <% else %>
-                  <strike><%= "Outdoor" %></strike>
-                <% end %>
-                </li>
-            </ul>
-          </div>
-          <div class="col-4">
-          </div>
-          <div class="col-4" data-controller="compute-price" data-compute-price-fee-value="<%= @place.price_per_day.round %>">
-            <h4><%= @place.price_per_day.round %> € per day</h4>
-              <%= simple_form_for [@place, @booking] do |f| %>
-                <div class="form-inputs">
-                  <%= f.label :first_day %>
-                  <%= f.date_field :first_day, data: { compute_price_target: "firstDay" } %>
-                </div>
-                <div class="form-inputs" data-action="change->compute-price#compute">
-                  <%= f.label :last_day %>
-                  <%= f.date_field :last_day, data: { compute_price_target: "lastDay" } %>
-                </div>
-                <div class="btn form-actions">
-                  <%= f.submit %>
-                </div>
-              <% end %>
-              <div data-compute-price-target="priceElement">
-                <p>Réservation pour <span data-compute-price-target="totalDays">0</span> jours</p>
-                <p>Prix total : <span data-compute-price-target="totalPrice">0</span> € </p>
-              </div>
-          </div>
-          <hr class="my-8">
-      </div>
-        <div class="col-8" >
-          <% if @place.description.present? %>
-            <p><%= @place.description.html_safe %></p>
-          <% else %>
-            <p>There is no description for this place</p>
+  <div class="row">
+    <div class="col-md-6">
+      <div id="carouselExampleIndicators-<%= @place.id %>" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <% @place.photos.each_with_index do |photo, index| %>
+            <button type="button" data-bs-target="#carouselExampleIndicators-<%= @place.id %>" data-bs-slide-to="<%= index %>" class="<%= 'active' if index == 0 %>" aria-current="<%= 'true' if index == 0 %>" aria-label="Slide <%= index + 1 %>"></button>
           <% end %>
         </div>
-</div>
+        <div class="carousel-inner" style="height: 500px; width: 100%; border-radius: 5%">
+          <% @place.photos.each_with_index do |photo, index| %>
+            <div class="carousel-item <%= 'active' if index == 0 %>" style="height: 500px; width: 100%;">
+              <%= cl_image_tag(photo.key, width: 400, height: 400, class: 'd-block w-100', alt: "Slide #{index + 1}", style: "object-fit: cover; width: 100%; height: 100%; border-radius: 5%;") %>
+            </div>
+          <% end %>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators-<%= @place.id %>" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators-<%= @place.id %>" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-6 ">
+      <div class="showmap"
+        data-controller="map"
+        data-map-marker-value="<%= @marker.to_json %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
+    </div>
+  </div>
+  <div class = "row">
+    <div class="col-4">
+      <h4>Ce que <%= @place.user.first_name %> vous propose</h4>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><i class="fa-solid fa-desktop"></i> <%= @place.screen_number %> Screen</li>
+        <li class="list-group-item"><i class="fa-solid fa-chair"></i> <%= @place.desk_number %> Desk</li>
+        <li class="list-group-item"><i class="fa-solid fa-bed"></i> <%= @place.bed_number %> Bed</li>
+        <li class="list-group-item"><i class="fa-solid fa-wifi"></i> Wifi speed <%= @place.internet_speed %> Mbit/s </li>
+        <li class="list-group-item"><i class="fa-regular fa-snowflake"></i>
+          <% if @place.air_conditionning == true %>
+            <%= "Air Conditioning" %>
+          <% else %>
+            <strike><%= "Air Conditioning" %></strike>
+          <% end %>
+        </li>
+        <li class="list-group-item"><i class="fa-solid fa-sun"></i>
+          <% if @place.outdoor == true %>
+            <%= "Outdoor" %>
+          <% else %>
+            <strike><%= "Outdoor" %></strike>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-4">
+    </div>
+      <div class="col-4" data-controller="compute-price" data-compute-price-fee-value="<%= @place.price_per_day.round %>">
+        <h4><%= @place.price_per_day.round %> € per day</h4>
+          <%= simple_form_for [@place, @booking] do |f| %>
+            <div class="form-inputs">
+              <%= f.label :first_day %>
+              <%= f.date_field :first_day, data: { compute_price_target: "firstDay" } %>
+            </div>
+            <div class="form-inputs" data-action="change->compute-price#compute">
+              <%= f.label :last_day %>
+              <%= f.date_field :last_day, data: { compute_price_target: "lastDay" } %>
+            </div>
+            <div class="btn form-actions">
+              <%= f.submit %>
+            </div>
+          <% end %>
+         <div data-compute-price-target="priceElement">
+           <p>Réservation pour <span data-compute-price-target="totalDays">0</span> jours</p>
+           <p>Prix total : <span data-compute-price-target="totalPrice">0</span> € </p>
+          </div>
+        </div>
+        <hr class="my-8">
+      </div>
+      <div class="col-8" >
+        <% if @place.description.present? %>
+          <p><%= @place.description.html_safe %></p>
+        <% else %>
+          <p>There is no description for this place</p>
+        <% end %>
+      </div>
+    </div>
