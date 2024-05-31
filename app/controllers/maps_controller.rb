@@ -7,7 +7,7 @@ class MapsController < ApplicationController
       {
         lat: place.latitude,
         lng: place.longitude,
-        info_window_html: render_to_string(partial: "shared/info_window", locals: { place: place }),
+        info_window_html: render_to_string(partial: "shared/info_window_worldmap", locals: { place: place }),
         marker_html: render_to_string(partial: "shared/marker", locals: { place: place })
       }
     end
