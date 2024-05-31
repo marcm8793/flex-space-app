@@ -5,61 +5,58 @@
         <h5 class="modal-title">Add a new place 🛖</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body" data-controller="bulk-data">
+      <div class="modal-body" data-controller="bulk-data address-autocomplete" data-address-autocomplete-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
         <%= simple_form_for(@place) do |f| %>
           <div class="form-inputs mb-3">
             <%= f.label :bulk_data, "Paste Data for bulk booking 👀 (CSV format)" %>
             <textarea data-bulk-data-target="bulkDataInput" class="form-control" style="width: 100%;" rows="1"></textarea>
           </div>
-            <div class="w-100 mb-3 form-inputs">
-              <%= f.input :address_street_name,
-                input_html: {data: {address_autocomplete_target: "address"}},
-                  wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}, class: "form-group"}
-              %>
-            <div>
+          <div class="w-100 mb-3 form-inputs position-relative">
+            <%= f.input :address_street_name, input_html: {data: {address_autocomplete_target: "address"}, wrapper_html: {class: "form-group"}, class: "d-none"} %>
+          </div>
           <div class="row">
             <div class="col-md-6">
               <div class="form-inputs">
                 <%= f.label :address_country %>
-                <%= f.text_field :address_country, id: 'address_country', class: 'form-control', data: { bulk_data_target: 'addressCountry' } %>
+                <%= f.text_field :address_country, class: 'form-control', data: { address_autocomplete_target: 'addressCountry' } %>
               </div>
               <div class="form-inputs">
                 <%= f.label :address_city %>
-                <%= f.text_field :address_city, id: 'address_city', class: 'form-control', data: { bulk_data_target: 'addressCity' } %>
+                <%= f.text_field :address_city, class: 'form-control', data: { address_autocomplete_target: 'addressCity' } %>
               </div>
               <div class="form-inputs">
                 <%= f.label :address_zip_code %>
-                <%= f.text_field :address_zip_code, id: 'address_zip_code', class: 'form-control', data: { bulk_data_target: 'addressZipCode' } %>
+                <%= f.text_field :address_zip_code, class: 'form-control', data: { address_autocomplete_target: 'addressZipCode' } %>
               </div>
               <div class="form-inputs">
                 <%= f.label :screen_number %>
-                <%= f.number_field :screen_number, id: 'screen_number', class: 'form-control', data: { bulk_data_target: 'screenNumber' } %>
+                <%= f.number_field :screen_number, class: 'form-control', data: { bulk_data_target: 'screenNumber' } %>
               </div>
               <div class="form-inputs">
                 <%= f.label :desk_number %>
-                <%= f.number_field :desk_number, id: 'desk_number', class: 'form-control', data: { bulk_data_target: 'deskNumber' } %>
+                <%= f.number_field :desk_number, class: 'form-control', data: { bulk_data_target: 'deskNumber' } %>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-inputs">
                 <%= f.label :bed_number %>
-                <%= f.number_field :bed_number, id: 'bed_number', class: 'form-control', data: { bulk_data_target: 'bedNumber' } %>
+                <%= f.number_field :bed_number, class: 'form-control', data: { bulk_data_target: 'bedNumber' } %>
               </div>
               <div class="form-inputs">
                 <%= f.label :internet_speed %>
-                <%= f.number_field :internet_speed, step: :any, id: 'internet_speed', class: 'form-control', data: { bulk_data_target: 'internetSpeed' } %>
+                <%= f.number_field :internet_speed, step: :any, class: 'form-control', data: { bulk_data_target: 'internetSpeed' } %>
               </div>
               <div class="form-inputs">
                 <%= f.label :outdoor %>
-                <%= f.check_box :outdoor, id: 'outdoor', data: { bulk_data_target: 'outdoor' } %>
+                <%= f.check_box :outdoor, data: { bulk_data_target: 'outdoor' } %>
               </div>
               <div class="form-inputs">
                 <%= f.label :air_conditionning %>
-                <%= f.check_box :air_conditionning, id: 'air_conditionning', data: { bulk_data_target: 'airConditionning' } %>
+                <%= f.check_box :air_conditionning, data: { bulk_data_target: 'airConditionning' } %>
               </div>
               <div class="form-inputs">
                 <%= f.label :price_per_day %>
-                <%= f.number_field :price_per_day, step: :any, id: 'price_per_day', class: 'form-control', data: { bulk_data_target: 'pricePerDay' } %>
+                <%= f.number_field :price_per_day, step: :any, class: 'form-control', data: { bulk_data_target: 'pricePerDay' } %>
               </div>
               <div class="form-inputs">
                 <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'form-control' } %>

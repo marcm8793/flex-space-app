@@ -1,16 +1,54 @@
 .mapboxgl-ctrl-geocoder {
-  width: 700px;
-  border: 1px solid lightgrey;
+  width: 100%;
+  border: 1px solid #ced4da; /* Match the border color of other input fields */
   box-shadow: none;
   background-color: transparent;
+  border-radius: 0.25rem; /* Match border-radius with other inputs */
+  align-items: center;
 }
 
 .mapboxgl-ctrl-geocoder--input {
   width: 100%;
-  padding: 10px;
   font-size: 16px;
   border: none;
-  border-radius: 0;
   box-shadow: none;
   background-color: transparent;
+}
+
+.mapboxgl-ctrl-geocoder--input::placeholder {
+  color: #6c757d; /* Match placeholder color with other inputs */
+}
+
+.mapboxgl-ctrl-geocoder .suggestions {
+  border-top: none; /* Remove the top border of the suggestion dropdown */
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05); /* Match the dropdown shadow with Bootstrap */
+}
+
+.mapboxgl-ctrl-geocoder--suggestion {
+  padding: 10px; /* Match padding with input fields */
+  font-size: 16px; /* Match font size with input fields */
+}
+
+.mapboxgl-ctrl-geocoder--suggestion:hover {
+  background-color: #f8f9fa; /* Match hover background color with other inputs */
+}
+
+.mapboxgl-ctrl-geocoder--suggestion-active {
+  background-color: #e9ecef; /* Match active suggestion background color */
+}
+
+.mapboxgl-ctrl-geocoder--icon {
+  display: none; /* Hide the default search icon */
+}
+
+.mapboxgl-ctrl-geocoder--pin-right {
+  display: none; /* Hide the clear button */
+}
+
+/* Optional: Style the dropdown menu to look like other dropdowns */
+.mapboxgl-ctrl-geocoder .suggestions {
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-top: none;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
 }
