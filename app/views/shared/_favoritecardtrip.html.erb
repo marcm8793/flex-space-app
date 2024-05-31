@@ -1,7 +1,7 @@
 <div class="row">
   <% @favorite_places.each do |place| %>
     <div class="col-md-4">
-      <div class="card mb-4">
+      <div class="card mb-4" style="border-radius: 5%; position: relative;">
         <div class="card-body">
           <h5 class="card-title"><%= place.address_city %>, <%= place.address_country %></h5>
           <p class="card-text">
@@ -15,7 +15,7 @@
             <strong>Price Per Day:</strong> $<%= place.price_per_day %>
           </p>
           <div>
-            <%= link_to 'View', place_path(place), class: 'btn btn-primary' %>
+            <%= link_to 'View', place_path(place), class: 'btn btn-outline-primary' %>
           </div>
         </div>
       </div>
