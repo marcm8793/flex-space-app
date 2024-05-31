@@ -31,10 +31,22 @@
         <p class="ms-0" style="margin: 0; line-height: 40px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><strong><%= place.address_city %>, <%= place.address_country %></strong></p>
       </div>
       <div class="d-flex justify-content-between align-items-center w-100">
-        <span style="height: 20px; line-height: 20px;">🖥️ <%= place.screen_number %></span>
-        <span style="height: 20px; line-height: 20px;">€ <%= place.price_per_day %></span>
-        <span style="height: 20px; line-height: 20px;">🛏️ <%= place.bed_number %></span>
-        <span style="height: 20px; line-height: 20px;">🛜 <%= place.internet_speed %></span>
+        <span style="height: 20px; line-height: 20px;">
+        <%= image_tag 'pcicon.svg', width: 30, height: 30, class: 'icon' %>
+        <%= place.screen_number %>
+        </span>
+        <span style="height: 20px; line-height: 20px;">
+        <%= image_tag 'bedicon.svg', width: 30, height: 30, class: 'icon' %>
+        <%= place.bed_number %>
+        </span>
+        <span style="height: 20px; line-height: 20px;">
+        <%= image_tag 'wifiicon.svg', width: 30, height: 30, class: 'icon' %>
+        <%= place.internet_speed %>
+        </span>
+        <span style="height: 20px; line-height: 20px;">
+        <%= image_tag 'euroicon.svg', width: 30, height: 30, class: 'icon' %>
+        <%= place.price_per_day %>
+        </span>
       </div>
     </div>
   <% end %>
