@@ -11,12 +11,12 @@
             <%= f.label :bulk_data, "Paste Data for bulk booking 👀 (CSV format)" %>
             <textarea data-bulk-data-target="bulkDataInput" class="form-control" style="width: 100%;" rows="1"></textarea>
           </div>
-            <div class="form-inputs mb-3">
-            <div class="w-100" data-controller="address-autocomplete" data-address-autocomplete-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-              <%= f.input :address_street_name, input_html: {data: {address_autocomplete_target: "address"}, class: "d-none"},
-                            id: 'address_street_name', class: 'form-control', data: { bulk_data_target: 'addressStreetName' }
+            <div class="w-100 mb-3 form-inputs">
+              <%= f.input :address_street_name,
+                input_html: {data: {address_autocomplete_target: "address"}},
+                  wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}, class: "form-group"}
               %>
-            </div>
+            <div>
           <div class="row">
             <div class="col-md-6">
               <div class="form-inputs">

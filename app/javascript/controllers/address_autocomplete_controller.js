@@ -12,13 +12,16 @@ export default class extends Controller {
       accessToken: this.apiKeyValue,
       types: "country,region,place,postcode,locality,neighborhood,address",
     });
+    console.log(this.geocoder);
     this.geocoder.addTo(this.element);
     this.geocoder.on("result", (event) => this.#setInputValue(event));
     this.geocoder.on("clear", () => this.#clearInputValue());
   }
 
   #setInputValue(event) {
-    this.addressTarget.value = event.result["address_street_name"];
+    console.log(event.result);
+    const address = event.result.place_name;
+    this.addressTarget.value = address;
   }
 
   #clearInputValue() {
