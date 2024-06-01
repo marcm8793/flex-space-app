@@ -58,38 +58,43 @@
         </li>
       </ul>
     </div>
-
-    <div class="col-4">
+    <div class="col-4 pt-4">
     </div>
-      <div class="col-4" data-controller="compute-price" data-compute-price-fee-value="<%= @place.price_per_day.round %>">
+    <div class="col-4 mt-3">
+      <div data-controller="compute-price" data-compute-price-fee-value="<%= @place.price_per_day.round %>">
         <div class = "card container border-primary pb-2" style="border-radius: 5%">
           <h4 class="pt-4 text-center"><%= @place.price_per_day.round %> € per day</h4>
-            <%= simple_form_for [@place, @booking], html: { data: { controller: :datepicker } } do |f| %>
+            <%= simple_form_for [@place,@booking], html: { data: { controller: :datepicker } } do |f| %>
               <div class="form-inputs">
                 <%= f.input :first_day, label: "Jour d'arrivée", as: :string, input_html: { data: {  action: "change->compute-price#compute", datepicker_target: "startDate", compute_price_target: "firstDay" }  } %>
               </div>
               <div class="form-inputs" data-action="click->compute-price#compute">
                 <%= f.input :last_day, label: "Jour de départ", as: :string, input_html: { data: { datepicker_target: "endDate", compute_price_target: "lastDay" }  } %>
               </div>
-            <div class="text-end" data-compute-price-target="priceElement">
-              <p>Réservation pour <span data-compute-price-target="totalDays">0</span> jours</p>
-              <p>Prix total : <span data-compute-price-target="totalPrice">0</span> € </p>
-            </div>
-              <div class="text-center">
-                <div>
-                  <%= f.submit class: 'btn btn-primary'%>
-                </div>
+              <div class="text-end" data-compute-price-target="priceElement">
+                <p>Réservation pour <span data-compute-price-target="totalDays">0</span> jours</p>
+                <p>Prix total : <span data-compute-price-target="totalPrice">0</span> € </p>
+              </div>
+                <div class="text-center">
+                  <div>
+                    <%= f.submit 'Réserver', class: 'btn btn-primary'%>
+                  </div>
               <% end %>
-            </div>
         </div>
-        </div>
-        <hr class="my-8 mt-3">
       </div>
-      <div class="col-8" >
-        <% if @place.description.present? %>
-        <p><%= @place.description.html_safe %></p>
-        <% else %>
-          <p>There is no description for this place</p>
-        <% end %>
-      </div>
+    </div>
+</div>
+
+    </div>
+  </div>
+  <hr class="my-8 mt-3">
+  </div>
+
+  <div class="col-8" >
+    <% if @place.description.present? %>
+      <p><%= @place.description.html_safe %></p>
+    <% else %>
+      <p>There is no description for this place</p>
+    <% end %>
+  </div>
 </div>
