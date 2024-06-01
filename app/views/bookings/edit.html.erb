@@ -1,13 +1,6 @@
-<%= simple_form_for [@place, @booking] do |f| %>
-  <div class="field">
-    <%= f.label :first_day %>
-    <%= f.date_field :first_day %>
+
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <%= render 'shared/bookingcard' %>
   </div>
-  <div class="field">
-    <%= f.label :last_day %>
-    <%= f.date_field :last_day %>
-  </div>
-  <div class="actions">
-    <%= f.submit 'Update Booking', class: "btn btn-primary" %>
-  </div>
-<% end %>
+</div>

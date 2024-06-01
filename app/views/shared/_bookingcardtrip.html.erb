@@ -17,7 +17,7 @@
               <strong>Price Per Day:</strong> $<%= booking.place.price_per_day %>
             </p>
             <div>
-              <%= link_to 'Edit', edit_place_booking_path(booking.place, booking), class: 'btn btn-outline-secondary' %>
+              <%= link_to 'Edit', edit_place_booking_path(booking.place, booking), class: 'btn btn-outline-primary' %>
               <%= link_to 'Delete', place_booking_path(booking.place, booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-outline-danger" %>
             </div>
           </div>
