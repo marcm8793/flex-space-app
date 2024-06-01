@@ -52,6 +52,11 @@ class PlacesController < ApplicationController
       @places = @places.where(air_conditionning: true)
       @applied_filters[:air_conditionning] = true
     end
+
+    if params[:favorites].present? && user_signed_in?
+      @places = @places.joins(:favorites).where(favorites: { user_id: current_user.id })
+      @applied_filters[:favorites] = true
+    end
   end
 
 

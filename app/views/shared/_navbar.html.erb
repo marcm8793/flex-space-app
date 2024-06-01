@@ -108,13 +108,19 @@
               <output class="text-center" id="screenNumberOutput" data-range-target="output"><%= params[:screen_number] || 1 %></output>
             </div>
           </div>
-          <div class="mb-3 form-check">
-            <%= check_box_tag :outdoor, '1', params[:outdoor].present?, class: "form-check-input" %>
-            <%= label_tag :outdoor, "Outdoor Space", class: "form-check-label" %>
+          <div class="d-flex justify-content-between">
+            <div class="mb-3 form-check">
+              <%= check_box_tag :outdoor, '1', params[:outdoor].present?, class: "form-check-input" %>
+              <%= label_tag :outdoor, "Outdoor Space", class: "form-check-label" %>
+            </div>
+            <div class="mb-3 form-check">
+              <%= check_box_tag :air_conditionning, '1', params[:air_conditionning].present?, class: "form-check-input" %>
+              <%= label_tag :air_conditionning, "Air Conditioning", class: "form-check-label" %>
+            </div>
           </div>
           <div class="mb-3 form-check">
-            <%= check_box_tag :air_conditionning, '1', params[:air_conditionning].present?, class: "form-check-input" %>
-            <%= label_tag :air_conditionning, "Air Conditioning", class: "form-check-label" %>
+            <%= check_box_tag :favorites, '1', params[:favorites].present?, class: "form-check-input" %>
+            <%= label_tag :favorites, "Favorites", class: "form-check-label" %>
           </div>
           <div class="modal-footer">
             <%= submit_tag "Apply Filters", class: "btn btn-primary" %>
