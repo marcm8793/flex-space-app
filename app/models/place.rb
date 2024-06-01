@@ -21,7 +21,8 @@ class Place < ApplicationRecord
   validates :description, presence: true
 
   geocoded_by :full_address
-  after_validation :geocode, if: :address_changed?
+  after_validation :geocode, if: :will_save_change_to_address_country? || :will_save_change_to_address_city? || :will_save_change_to_address_street_name? || :will_save_change_to_address_zip_code? || :will_save_change_to_address_country?
+
 
   def favorited_by?(user)
     favorited_by.include?(user)
@@ -29,12 +30,6 @@ class Place < ApplicationRecord
 
   def full_address
     [address_street_name, address_city, address_zip_code, address_country].compact.join(', ')
-  end
-
-  private
-
-  def address_changed?
-    address_street_name_changed? || address_city_changed? || address_zip_code_changed? || address_country_changed?
   end
 
 end

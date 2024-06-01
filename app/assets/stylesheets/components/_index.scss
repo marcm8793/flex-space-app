@@ -12,3 +12,25 @@
 body {
   padding-top: 88px;
 }
+
+.invalid {
+  border-color: darkslategray; /* Red border for invalid inputs */
+}
+
+.validation-error {
+  color: darkslategrey;
+  font-size: 0.875em;
+  margin-top: 0.25rem;
+}
+
+.header-text {
+  font-family: "Roboto", sans-serif;
+}
+
+.website-name {
+  font-family: "Montserrat", sans-serif;
+}
+
+.custom-rounded {
+  border-radius: 15px;
+}
