@@ -2,13 +2,22 @@
   <ul class="nav nav-tabs d-flex justify-content-between" id="myTab" role="tablist">
     <div class="d-flex">
       <li class="nav-item" role="presentation">
-        <a class="nav-link active" id="bookings-tab" data-bs-toggle="tab" href="#bookings" role="tab" aria-controls="bookings" aria-selected="true">My Bookings</a>
+        <a class="nav-link active" id="bookings-tab" data-bs-toggle="tab" href="#bookings" role="tab" aria-controls="bookings" aria-selected="true">
+        <%= image_tag "bookingtripsicon.svg", alt: "backpack logo", width: "25", height: "25", style:"cursor: pointer;" %>
+        My Bookings
+        </a>
       </li>
       <li class="nav-item" role="presentation">
-        <a class="nav-link" id="places-tab" data-bs-toggle="tab" href="#places" role="tab" aria-controls="places" aria-selected="false">My Places</a>
+        <a class="nav-link" id="places-tab" data-bs-toggle="tab" href="#places" role="tab" aria-controls="places" aria-selected="false">
+        <%= image_tag "placetripsicon.svg", alt: "backpack logo", width: "25", height: "25", style:"cursor: pointer;" %>
+        My Places
+        </a>
       </li>
       <li class="nav-item" role="presentation">
-        <a class="nav-link" id="favorites-tab" data-bs-toggle="tab" href="#favorites" role="tab" aria-controls="favorites" aria-selected="false">My Favorites</a>
+        <a class="nav-link" id="favorites-tab" data-bs-toggle="tab" href="#favorites" role="tab" aria-controls="favorites" aria-selected="false">
+        <%= image_tag "favoritestripsicon.svg", alt: "backpack logo", width: "25", height: "25", style:"cursor: pointer;" %>
+        My Favorites
+        </a>
       </li>
     </div>
     <li class="nav-item" role="presentation">
@@ -21,7 +30,7 @@
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="bookings" role="tabpanel" aria-labelledby="bookings-tab">
       <div class="container pt-4 mt-4">
-        <h2>My Bookings</h2>
+        <h2> My Bookings</h2>
         <%= render 'shared/bookingcardtrip' %>
       </div>
     </div>
